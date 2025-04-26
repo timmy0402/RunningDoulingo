@@ -28,6 +28,7 @@ id steps
 id text_dashboard
 id text_home
 id text_notifications
+id tv_stepGoal
 id tv_stepsTaken
 layout activity_main
 layout fragment_dashboard
