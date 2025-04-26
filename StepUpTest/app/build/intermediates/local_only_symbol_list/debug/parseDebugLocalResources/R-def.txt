@@ -17,6 +17,7 @@ drawable ic_home_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_notifications_black_24dp
+drawable ic_power_up
 id container
 id imageView
 id login

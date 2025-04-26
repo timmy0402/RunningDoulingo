@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/power_up"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/ic_power_up"
         android:title="@string/title_power_up" />
 
     <item
