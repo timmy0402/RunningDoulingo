@@ -36,7 +36,7 @@ public class Home extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 overridePendingTransition(0, 0);
                 return true;
-            } else if (id == R.id.navigation_notifications) {
+            } else if (id == R.id.power_up) {
                 startActivity(new Intent(getApplicationContext(), Home.class));
                 overridePendingTransition(0, 0);
                 return true;
