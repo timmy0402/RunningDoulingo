@@ -23,8 +23,8 @@
 hs_err_pid*
 replay_pid*
 
-.idea
-.gradlew
+**/.idea
+**/.gradlew
 
 ## This file must *NOT* be checked into Version Control Systems
 **/local.properties
