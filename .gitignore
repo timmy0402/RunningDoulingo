@@ -29,3 +29,5 @@ replay_pid*
 
 ## This file must *NOT* be checked into Version Control Systems
 **/local.properties
+
+**/build
