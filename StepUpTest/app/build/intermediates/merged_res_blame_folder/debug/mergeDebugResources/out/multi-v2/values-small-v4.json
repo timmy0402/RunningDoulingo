@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.stepuptest.app-mergeDebugResources-42:/values-small-v4/values-small-v4.xml",
+            "outputFile": "com.example.stepuptest.app-mergeDebugResources-43:/values-small-v4/values-small-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\apson\\.gradle\\caches\\8.11.1\\transforms\\f353e8ef5d712a4532b056434b7c8275\\transformed\\material-1.10.0\\res\\values-small-v4\\values-small-v4.xml",
+                    "source": "C:\\Users\\minhn\\.gradle\\caches\\8.11.1\\transforms\\f54ff8cf062e6c5c9c4b08f5ce3139aa\\transformed\\material-1.10.0\\res\\values-small-v4\\values-small-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

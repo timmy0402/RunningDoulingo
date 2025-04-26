@@ -30,6 +30,9 @@
         android:testOnly="true"
         android:theme="@style/Theme.StepUpTest" >
         <activity
+            android:name="com.example.stepuptest.Home"
+            android:exported="false" />
+        <activity
             android:name="com.example.stepuptest.MainActivity"
             android:exported="true"
             android:label="@string/app_name" >

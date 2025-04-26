@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
+import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +33,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TextView stepsTakenTextView;
 
     private static final int PERMISSION_REQUEST_ACTIVITY_RECOGNITION = 100;
+
+    private Button nextActivityButton;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +64,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             Toast.makeText(this, "No Step Counter Sensor found!", Toast.LENGTH_LONG).show();
         }
 
+
         loadData();
         resetSteps();
+        // Initialize button using findViewById
+        nextActivityButton = findViewById(R.id.button);
+
+        // Set click listener for the button
+        nextActivityButton.setOnClickListener(v -> {
+            // Create Intent to start SecondActivity
+            Intent intent = new Intent(MainActivity.this, Home.class);
+            // Start the activity
+            startActivity(intent);
+        });
     }
 
     // Register sensor when activity starts
