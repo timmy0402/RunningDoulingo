@@ -9,8 +9,8 @@
 9        android:targetSdkVersion="35" />
 10
 11    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
-11-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:5:5-78
-11-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:5:22-76
+11-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:5:5-78
+11-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:5:22-76
 12
 13    <permission
 13-->[androidx.core:core:1.9.0] C:\Users\apson\.gradle\caches\8.11.1\transforms\48ba7e628c19d2894f4174e5bc23cdca\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
@@ -24,45 +24,45 @@
 17-->[androidx.core:core:1.9.0] C:\Users\apson\.gradle\caches\8.11.1\transforms\48ba7e628c19d2894f4174e5bc23cdca\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
 18
 19    <application
-19-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:7:5-27:19
+19-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:7:5-27:19
 20        android:allowBackup="true"
-20-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:8:9-35
+20-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:8:9-35
 21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 21-->[androidx.core:core:1.9.0] C:\Users\apson\.gradle\caches\8.11.1\transforms\48ba7e628c19d2894f4174e5bc23cdca\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
 22        android:dataExtractionRules="@xml/data_extraction_rules"
-22-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:9:9-65
+22-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:9:9-65
 23        android:debuggable="true"
 24        android:extractNativeLibs="false"
 25        android:fullBackupContent="@xml/backup_rules"
-25-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:10:9-54
+25-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:10:9-54
 26        android:icon="@mipmap/ic_launcher"
-26-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:11:9-43
+26-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:11:9-43
 27        android:label="@string/app_name"
-27-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:12:9-41
+27-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:12:9-41
 28        android:roundIcon="@mipmap/ic_launcher_round"
-28-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:13:9-54
+28-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:13:9-54
 29        android:supportsRtl="true"
-29-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:14:9-35
+29-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:14:9-35
 30        android:testOnly="true"
 31        android:theme="@style/Theme.StepUpTest" >
-31-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:15:9-48
+31-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:15:9-48
 32        <activity
-32-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:17:9-26:20
+32-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:17:9-26:20
 33            android:name="com.example.stepuptest.MainActivity"
-33-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:18:13-41
+33-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:18:13-41
 34            android:exported="true"
-34-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:19:13-36
+34-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:19:13-36
 35            android:label="@string/app_name" >
-35-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:20:13-45
+35-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:20:13-45
 36            <intent-filter>
-36-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:21:13-25:29
+36-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:21:13-25:29
 37                <action android:name="android.intent.action.MAIN" />
-37-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:22:17-69
-37-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:22:25-66
+37-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:22:17-69
+37-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:22:25-66
 38
 39                <category android:name="android.intent.category.LAUNCHER" />
-39-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:24:17-77
-39-->C:\Users\apson\AndroidStudioProjects\StepUpTest\app\src\main\AndroidManifest.xml:24:27-74
+39-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:24:17-77
+39-->C:\Users\apson\OneDrive\Documents\School Files\College\2024-25\Spring\Hackathon\RunningDoulingo\StepUpTest\app\src\main\AndroidManifest.xml:24:27-74
 40            </intent-filter>
 41        </activity>
 42

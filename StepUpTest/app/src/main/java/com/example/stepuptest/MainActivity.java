@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private float totalSteps = 0f;
     private float previousTotalSteps = 0f;
 
+    private float nextGoal = 1000f;
+
     // UI Component
     private TextView stepsTakenTextView;
 
