@@ -25,3 +25,6 @@ replay_pid*
 
 .idea
 .gradlew
+
+## This file must *NOT* be checked into Version Control Systems
+**/local.properties
