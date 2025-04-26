@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Outer Circle -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="2"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M12,12m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0" />
+
+    <!-- Inner Star -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M12,7l1.76,3.57 3.94,0.57 -2.85,2.78 0.67,3.91L12,16.77l-3.52,1.85 0.67-3.91 -2.85-2.78 3.94-0.57z" />
+</vector>
