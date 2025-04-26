@@ -1458,6 +1458,7 @@ color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
 color foreground_material_light
+color gray
 color highlighted_text_material_dark
 color highlighted_text_material_light
 color m3_appbar_overlay_color
@@ -3340,6 +3341,7 @@ id linear
 id listMode
 id list_item
 id locale
+id login
 id ltr
 id m3_side_sheet
 id marquee
@@ -3461,10 +3463,12 @@ id percent
 id pin
 id position
 id postLayout
+id power_up
 id pressed
 id progress_circular
 id progress_horizontal
 id radio
+id ranking
 id ratio
 id rectangles
 id report_drawn
@@ -3863,6 +3867,7 @@ string fab_transformation_sheet_behavior
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
+string login
 string m3_exceed_max_badge_text_suffix
 string m3_ref_typeface_brand_medium
 string m3_ref_typeface_brand_regular
@@ -3970,6 +3975,7 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string ranking
 string search_menu_title
 string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description
@@ -3979,7 +3985,7 @@ string side_sheet_behavior
 string status_bar_notification_info_overflow
 string title_dashboard
 string title_home
-string title_notifications
+string title_power_up
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

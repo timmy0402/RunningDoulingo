@@ -2,5 +2,7 @@
     <string name="app_name">StepUpTest</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_power_up">Power Up</string>
+    <string name="login">Login</string>
+    <string name="ranking">Ranking</string>
 </resources>
