@@ -1,6 +1,7 @@
 package com.example.stepuptest;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
@@ -10,6 +11,8 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        setContentView(R.layout.home);
+
 
         // Check and request permission for Activity Recognition (Android 10+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -62,6 +67,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         loadData();
         resetSteps();
+
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("BUTTONS", "User tapped the PowerUp");
+                new PowerUp();
+            }
+        });
+
+        // Initialize button using findViewById
+        Button nextActivityButton = findViewById(R.id.button);
+
+        // Set click listener for the button
+        nextActivityButton.setOnClickListener(v -> {
+            // Create Intent to start SecondActivity
+            Intent intent = new Intent(MainActivity.this, PowerUp.class);
+            // Start the activity
+            startActivity(intent);
+        });
     }
 
     // Register sensor when activity starts
@@ -162,4 +186,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
+
+
 }

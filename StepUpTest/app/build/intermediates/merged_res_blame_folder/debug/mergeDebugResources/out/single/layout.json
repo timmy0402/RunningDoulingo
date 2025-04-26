@@ -1,18 +1,34 @@
 [
     {
-        "merged": "com.example.stepuptest.app-mergeDebugResources-43:/layout/fragment_dashboard.xml",
-        "source": "com.example.stepuptest.app-main-46:/layout/fragment_dashboard.xml"
+        "merged": "/Users/dulguun/.gradle/daemon/8.11.1/com.example.stepuptest.app-mergeDebugResources-43:/layout/fragment_notifications.xml",
+        "source": "/Users/dulguun/.gradle/daemon/8.11.1/com.example.stepuptest.app-main-46:/layout/fragment_notifications.xml"
     },
     {
-        "merged": "com.example.stepuptest.app-mergeDebugResources-43:/layout/fragment_home.xml",
-        "source": "com.example.stepuptest.app-main-46:/layout/fragment_home.xml"
+        "merged": "/Users/dulguun/.gradle/daemon/8.11.1/com.example.stepuptest.app-mergeDebugResources-43:/layout/fragment_dashboard.xml",
+        "source": "/Users/dulguun/.gradle/daemon/8.11.1/com.example.stepuptest.app-main-46:/layout/fragment_dashboard.xml"
     },
     {
-        "merged": "com.example.stepuptest.app-mergeDebugResources-43:/layout/fragment_notifications.xml",
-        "source": "com.example.stepuptest.app-main-46:/layout/fragment_notifications.xml"
+        "merged": "/Users/dulguun/.gradle/daemon/8.11.1/com.example.stepuptest.app-mergeDebugResources-43:/layout/fragment_home.xml",
+        "source": "/Users/dulguun/.gradle/daemon/8.11.1/com.example.stepuptest.app-main-46:/layout/fragment_home.xml"
     },
     {
-        "merged": "com.example.stepuptest.app-mergeDebugResources-43:/layout/activity_main.xml",
-        "source": "com.example.stepuptest.app-main-46:/layout/activity_main.xml"
+        "merged": "/Users/dulguun/.gradle/daemon/8.11.1/com.example.stepuptest.app-mergeDebugResources-43:/layout/home.xml",
+        "source": "/Users/dulguun/.gradle/daemon/8.11.1/com.example.stepuptest.app-main-46:/layout/home.xml"
+    },
+    {
+        "merged": "com.example.stepuptest.app-mergeDebugResources-43:/layout/activity_login.xml",
+        "source": "com.example.stepuptest.app-main-46:/layout/activity_login.xml"
+    },
+    {
+        "merged": "/Users/dulguun/.gradle/daemon/8.11.1/com.example.stepuptest.app-mergeDebugResources-43:/layout/activity_main.xml",
+        "source": "/Users/dulguun/.gradle/daemon/8.11.1/com.example.stepuptest.app-main-46:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/dulguun/.gradle/daemon/8.11.1/com.example.stepuptest.app-mergeDebugResources-43:/layout/activity_login.xml",
+        "source": "/Users/dulguun/.gradle/daemon/8.11.1/com.example.stepuptest.app-main-46:/layout/activity_login.xml"
+    },
+    {
+        "merged": "/Users/dulguun/.gradle/daemon/8.11.1/com.example.stepuptest.app-mergeDebugResources-43:/layout/activity_power_up.xml",
+        "source": "/Users/dulguun/.gradle/daemon/8.11.1/com.example.stepuptest.app-main-46:/layout/activity_power_up.xml"
     }
 ]

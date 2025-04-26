@@ -3198,6 +3198,12 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id button
+id button1
+id button2
+id button3
+id button4
+id buttonLogin
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -3271,6 +3277,8 @@ id easeInOut
 id easeOut
 id east
 id edge
+id editTextPassword
+id editTextUsername
 id edit_query
 id elastic
 id embed
@@ -3319,6 +3327,7 @@ id ignore
 id ignoreRequest
 id image
 id imageView
+id imageView2
 id immediateStop
 id included
 id indeterminate
@@ -3342,6 +3351,7 @@ id list_item
 id locale
 id ltr
 id m3_side_sheet
+id main
 id marquee
 id masked
 id match_constraint
@@ -3728,7 +3738,9 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_login
 layout activity_main
+layout activity_power_up
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -3748,6 +3760,7 @@ layout design_text_input_start_icon
 layout fragment_dashboard
 layout fragment_home
 layout fragment_notifications
+layout home
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
