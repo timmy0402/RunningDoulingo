@@ -26,7 +26,6 @@ id login
 id mobile_navigation
 id nav_host_fragment_activity_main
 id nav_view
-id navigation_dashboard
 id navigation_home
 id navigation_power_up
 id power_up
