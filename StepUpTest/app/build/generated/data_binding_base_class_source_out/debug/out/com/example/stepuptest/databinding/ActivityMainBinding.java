@@ -34,17 +34,21 @@ public final class ActivityMainBinding implements ViewBinding {
   public final TextView steps;
 
   @NonNull
+  public final TextView tvStepGoal;
+
+  @NonNull
   public final TextView tvStepsTaken;
 
   private ActivityMainBinding(@NonNull ConstraintLayout rootView,
       @NonNull ConstraintLayout container, @NonNull ImageView imageView,
-      @NonNull BottomNavigationView navView, @NonNull TextView steps,
+      @NonNull BottomNavigationView navView, @NonNull TextView steps, @NonNull TextView tvStepGoal,
       @NonNull TextView tvStepsTaken) {
     this.rootView = rootView;
     this.container = container;
     this.imageView = imageView;
     this.navView = navView;
     this.steps = steps;
+    this.tvStepGoal = tvStepGoal;
     this.tvStepsTaken = tvStepsTaken;
   }
 
@@ -95,6 +99,12 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tv_stepGoal;
+      TextView tvStepGoal = ViewBindings.findChildViewById(rootView, id);
+      if (tvStepGoal == null) {
+        break missingId;
+      }
+
       id = R.id.tv_stepsTaken;
       TextView tvStepsTaken = ViewBindings.findChildViewById(rootView, id);
       if (tvStepsTaken == null) {
@@ -102,7 +112,7 @@ public final class ActivityMainBinding implements ViewBinding {
       }
 
       return new ActivityMainBinding((ConstraintLayout) rootView, container, imageView, navView,
-          steps, tvStepsTaken);
+          steps, tvStepGoal, tvStepsTaken);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

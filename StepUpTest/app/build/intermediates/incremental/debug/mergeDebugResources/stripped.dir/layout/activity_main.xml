@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            android:textColor="@color/black"
+            android:textColor="@color/gray"
             android:textSize="100sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
@@ -38,6 +38,19 @@
             app:layout_constraintTop_toTopOf="@+id/imageView" />
 
         <!--Image View for the circle-->
+        <TextView
+            android:id="@+id/tv_stepGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0/50"
+            android:textColor="@color/gray"
+            android:textSize="50sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0.0" />
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="300dp"
@@ -45,8 +58,10 @@
             android:background="@drawable/circle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.498" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

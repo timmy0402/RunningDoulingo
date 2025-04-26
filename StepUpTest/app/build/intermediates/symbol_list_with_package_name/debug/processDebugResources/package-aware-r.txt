@@ -1458,6 +1458,7 @@ color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
 color foreground_material_light
+color gray
 color highlighted_text_material_dark
 color highlighted_text_material_light
 color m3_appbar_overlay_color
@@ -3340,6 +3341,7 @@ id linear
 id listMode
 id list_item
 id locale
+id login
 id ltr
 id m3_side_sheet
 id marquee
@@ -3415,7 +3417,7 @@ id navigation_bar_item_small_label_view
 id navigation_dashboard
 id navigation_header_container
 id navigation_home
-id navigation_notifications
+id navigation_power_up
 id never
 id neverCompleteToEnd
 id neverCompleteToStart
@@ -3461,10 +3463,12 @@ id percent
 id pin
 id position
 id postLayout
+id power_up
 id pressed
 id progress_circular
 id progress_horizontal
 id radio
+id rank
 id ratio
 id rectangles
 id report_drawn
@@ -3589,6 +3593,7 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id tv_stepGoal
 id tv_stepsTaken
 id unchecked
 id uniform
@@ -3979,7 +3984,9 @@ string side_sheet_behavior
 string status_bar_notification_info_overflow
 string title_dashboard
 string title_home
-string title_notifications
+string title_login
+string title_power_up
+string title_rank
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

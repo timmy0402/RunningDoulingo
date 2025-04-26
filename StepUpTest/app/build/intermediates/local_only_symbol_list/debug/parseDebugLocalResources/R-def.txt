@@ -2,6 +2,7 @@ R_DEF: Internal format may change without notice
 local
 color black
 color colorPrimary
+color gray
 color purple_200
 color purple_500
 color purple_700
@@ -18,16 +19,20 @@ drawable ic_launcher_foreground
 drawable ic_notifications_black_24dp
 id container
 id imageView
+id login
 id mobile_navigation
 id nav_host_fragment_activity_main
 id nav_view
 id navigation_dashboard
 id navigation_home
-id navigation_notifications
+id navigation_power_up
+id power_up
+id rank
 id steps
 id text_dashboard
 id text_home
 id text_notifications
+id tv_stepGoal
 id tv_stepsTaken
 layout activity_main
 layout fragment_dashboard
@@ -40,7 +45,9 @@ navigation mobile_navigation
 string app_name
 string title_dashboard
 string title_home
-string title_notifications
+string title_login
+string title_power_up
+string title_rank
 style Theme.StepUpTest
 xml backup_rules
 xml data_extraction_rules
