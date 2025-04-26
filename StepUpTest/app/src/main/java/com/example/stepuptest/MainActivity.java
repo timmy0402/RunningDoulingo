@@ -10,15 +10,22 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
 import android.content.Intent;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.navigation.NavigationBarView;
+
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
+
+
 
     // Declare sensor and sensor manager
     private SensorManager sensorManager;
@@ -35,8 +42,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private static final int PERMISSION_REQUEST_ACTIVITY_RECOGNITION = 100;
 
     private Button nextActivityButton;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +72,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         loadData();
         resetSteps();
+
+        BottomNavigationView bottomNavigationView=findViewById(R.id.nav_view);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_dashboard);
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+             int id = item.getItemId();
+
+             if (id == R.id.navigation_home) {
+                 startActivity(new Intent(getApplicationContext(), Home.class));
+                 overridePendingTransition(0, 0);
+                 return true;
+             } else if (id == R.id.navigation_dashboard) {
+                 return true;
+             } else if (id == R.id.navigation_notifications) {
+                 startActivity(new Intent(getApplicationContext(), Home.class));
+                 overridePendingTransition(0, 0);
+                 return true;
+             }
+             return false;
+        });
+
         // Initialize button using findViewById
         nextActivityButton = findViewById(R.id.button);
 
