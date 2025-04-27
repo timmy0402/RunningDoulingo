@@ -3,12 +3,11 @@ package com.example.stepuptest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -98,10 +97,20 @@ public class Rank extends AppCompatActivity {
     private void loadDailySteps() {
         Intent intent = getIntent();
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-        float totalSteps = sharedPreferences.getFloat("key1", 0f);
+        float totalSteps = sharedPreferences.getFloat("key2_total_step", 0f);
+
+        Log.d("Step Counter", "Loaded total steps : " + totalSteps);
+
+
         rankList = new ArrayList<>();
 
-        rankList.add(new RankItem("total", (int) (totalSteps)));
+        rankList.add(new RankItem("Tim", 999));
+        rankList.add(new RankItem("Anoop", 134));
+        rankList.add(new RankItem("Dudu", 20));
+        rankList.add(new RankItem("Mario", 1));
+        rankList.add(new RankItem("MyKoala", (int) (totalSteps)));
+
+        rankList.sort(RankItem::compareTo);
     }
 
 }
