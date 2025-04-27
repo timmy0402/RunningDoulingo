@@ -15,13 +15,17 @@
         android:layout_height="100dp"
 
         android:layout_marginEnd="4dp"
+        android:layout_marginTop="100dp"
+
         android:fontFamily="@font/bowlby_one"
         android:gravity="center"
         android:text="POWER UP"
-        android:textSize="32sp"
+        android:textSize="60sp"
 
+
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="117dp" />
+         />
 
     <Button
         android:id="@+id/button1"
@@ -29,6 +33,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="216dp"
         android:drawableTop="@drawable/baseline_pause_24"
+        android:text="x3: 25"
         android:drawablePadding="10dp"
         android:gravity="center"
         android:textSize="32sp"
@@ -44,6 +49,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="216dp"
         android:drawableTop="@drawable/ic_main"
+        android:text="x3: 25"
 
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"

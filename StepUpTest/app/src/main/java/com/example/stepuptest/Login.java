@@ -25,7 +25,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         ImageView imageView = findViewById(R.id.imageViewIcon);
-        imageView.setImageResource(R.drawable.ic_main);
+        imageView.setImageResource(R.drawable.ic_launcher_foreground);
 
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
