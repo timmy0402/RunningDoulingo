@@ -54,4 +54,20 @@ public class Rank extends AppCompatActivity {
             return false;
         });
     }
+    private void loadDailySteps() {
+        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        String storedHash = sharedPreferences.getString("hashString", null);
+        rankList = new ArrayList<>();
+
+        if (storedHash != null) {
+            Gson gson = new Gson();
+            Type type = new TypeToken<HashMap<String, Integer>>() {}.getType();
+            HashMap<String, Integer> dailySteps = gson.fromJson(storedHash, type);
+
+            for (String date : dailySteps.keySet()) {
+                int steps = dailySteps.get(date);
+                rankList.add(new RankItem(date, steps));
+            }
+        }
+    }
 }
