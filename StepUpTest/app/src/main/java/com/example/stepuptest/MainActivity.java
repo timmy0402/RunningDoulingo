@@ -53,7 +53,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private float totalSteps = 0f;
     private float previousTotalSteps = 0f;
     private float yesterdaySteps = 0f;
-    private HashMap<String, Integer> dailySteps;
+//    private HashMap<String, Integer> dailySteps;
+//private HashMap<String, String> dailySteps;
+public static HashMap<String, String> dailySteps;
+
+
     private float nextGoal = 50f;
     private float dailyGoal = 10f;
     private long dateTestLong = 0;
@@ -246,7 +250,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private void changeDate() {
         int today = (int) (((int) (totalSteps - previousTotalSteps)) - yesterdaySteps);
         currency += today / (long) Math.pow(10, 1);
-        dailySteps.put(LocalDate.now().plusDays(dateTestLong).toString(), today);
+//        dailySteps.put(LocalDate.now().plusDays(dateTestLong).toString(), today);
+        dailySteps.put(LocalDate.now().plusDays(dateTestLong).toString(), Integer.toString(today) + "/" + Integer.toString((int) dailyGoal));
         dateTextView.setText(String.valueOf(LocalDate.now().plusDays(dateTestLong)));
         currencyTextView.setText(String.valueOf(currency));
         dailyStepsTextView.setText("0");
@@ -326,7 +331,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         currency = sharedPreferences.getLong("currency", 0);
         streak = sharedPreferences.getLong("streak", 0);
         String storedHash = sharedPreferences.getString("hashString", "River stone");
-        java.lang.reflect.Type type = new TypeToken<HashMap<String, Integer>>(){}.getType();
+//        java.lang.reflect.Type type = new TypeToken<HashMap<String, Integer>>(){}.getType();
+        java.lang.reflect.Type type = new TypeToken<HashMap<String, String>>(){}.getType();
         if (!storedHash.equals("River stone")) {
             Gson gson = new Gson();
             dailySteps = gson.fromJson(storedHash, type);
