@@ -15,7 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class PowerUp extends AppCompatActivity {
 
-
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public class PowerUp extends AppCompatActivity {
         });
 
 
-        BottomNavigationView bottomNavigationView=findViewById(R.id.nav_view);
+        bottomNavigationView=findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.power_up);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -100,5 +100,10 @@ public class PowerUp extends AppCompatActivity {
             return false;
         });
 
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        bottomNavigationView.setSelectedItemId(R.id.power_up);
     }
 }

@@ -91,7 +91,7 @@ public static HashMap<String, String> dailySteps;
 
     private ActivityHomeBinding binding;
 
-
+    BottomNavigationView bottomNavigationView;
     private Button homeButton;
 
     @Override
@@ -139,7 +139,7 @@ public static HashMap<String, String> dailySteps;
             }
         });
 
-        BottomNavigationView bottomNavigationView=findViewById(R.id.nav_view);
+        bottomNavigationView=findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -272,6 +272,7 @@ public static HashMap<String, String> dailySteps;
     protected void onResume() {
         saveData();
         super.onResume();
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
         running = true;
         registerSensor();
         registerReceiver(m_timeChangedReceiver, s_intentFilter);

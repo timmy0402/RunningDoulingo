@@ -18,7 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class Login extends AppCompatActivity {
     EditText editTextUsername, editTextPassword;
     Button buttonLogin;
-
+    BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +51,7 @@ public class Login extends AppCompatActivity {
        }
         );
 
-        BottomNavigationView bottomNavigationView=findViewById(R.id.nav_view);
+        bottomNavigationView=findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.login);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -76,5 +76,10 @@ public class Login extends AppCompatActivity {
             return false;
         });
 
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        bottomNavigationView.setSelectedItemId(R.id.login);
     }
 }

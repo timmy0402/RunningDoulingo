@@ -19,6 +19,7 @@ public class Rank extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RankAdapter adapter;
     private List<RankItem> rankList;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class Rank extends AppCompatActivity {
         adapter = new RankAdapter(rankList);
         recyclerView.setAdapter(adapter);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
+        bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.rank);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -78,7 +79,7 @@ public class Rank extends AppCompatActivity {
         loadDailySteps();
         super.onResume();
 
-
+        bottomNavigationView.setSelectedItemId(R.id.rank);
         adapter = new RankAdapter(rankList);
         recyclerView.setAdapter(adapter);
     }
