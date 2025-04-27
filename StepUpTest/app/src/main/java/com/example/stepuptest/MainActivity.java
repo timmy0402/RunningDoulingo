@@ -172,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // Register sensor when activity starts
     @Override
     protected void onStart() {
+        saveData();
         super.onStart();
         registerSensor();
     }
@@ -179,6 +180,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // Unregister sensor when activity stops
     @Override
     protected void onStop() {
+        saveData();
         super.onStop();
         sensorManager.unregisterListener(this);
     }
@@ -263,6 +265,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // Handle resume event
     @Override
     protected void onResume() {
+        saveData();
         super.onResume();
         running = true;
         registerSensor();
@@ -273,6 +276,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // Handle pause event
     @Override
     protected void onPause() {
+        saveData();
         super.onPause();
         running = false;
         unregisterReceiver(m_timeChangedReceiver);

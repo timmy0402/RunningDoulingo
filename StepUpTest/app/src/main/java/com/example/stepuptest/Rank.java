@@ -66,8 +66,8 @@ public class Rank extends AppCompatActivity {
 
     @Override
     protected void onStart(){
-        super.onStart();
         loadDailySteps();
+        super.onStart();
 
         adapter = new RankAdapter(rankList);
         recyclerView.setAdapter(adapter);
@@ -76,8 +76,9 @@ public class Rank extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        super.onResume();
         loadDailySteps();
+        super.onResume();
+
 
         adapter = new RankAdapter(rankList);
         recyclerView.setAdapter(adapter);
@@ -85,8 +86,9 @@ public class Rank extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        super.onPause();
         loadDailySteps();
+        super.onPause();
+
 
         adapter = new RankAdapter(rankList);
         recyclerView.setAdapter(adapter);
