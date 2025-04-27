@@ -172,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // Register sensor when activity starts
     @Override
     protected void onStart() {
+        saveData();
         super.onStart();
         registerSensor();
     }
@@ -179,6 +180,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // Unregister sensor when activity stops
     @Override
     protected void onStop() {
+        saveData();
         super.onStop();
         sensorManager.unregisterListener(this);
     }
@@ -263,6 +265,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // Handle resume event
     @Override
     protected void onResume() {
+        saveData();
         super.onResume();
         running = true;
         registerSensor();
@@ -273,6 +276,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // Handle pause event
     @Override
     protected void onPause() {
+        saveData();
         super.onPause();
         running = false;
         unregisterReceiver(m_timeChangedReceiver);
@@ -310,9 +314,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         String hashMapString = gson.toJson(dailySteps);
         editor.putString("hashString", hashMapString);
         editor.putFloat("key1", previousTotalSteps);
+
+        editor.putFloat("key2_total_step", totalSteps);
+
         editor.putLong("currency", currency);
         editor.putLong("streak", streak);
         editor.apply();
+
+        Log.d("Step Counter", "total steps saved : " + totalSteps);
         Log.d("Step Counter", "Steps saved: " + previousTotalSteps);
         Log.d("Step Counter", "Saved daily steps");
         Log.d("Step Counter", "Saved currency: " + currency);
@@ -333,6 +342,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         } else {
             dailySteps  = new HashMap<>();
         }
+
         Log.d("Step Counter", "Loaded steps: " + previousTotalSteps);
         Log.d("Step Counter", "Loaded daily steps");
         Log.d("Step Counter", "Loaded currency: " + currency);
