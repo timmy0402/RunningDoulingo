@@ -314,9 +314,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         String hashMapString = gson.toJson(dailySteps);
         editor.putString("hashString", hashMapString);
         editor.putFloat("key1", previousTotalSteps);
+
+        editor.putFloat("key2_total_step", totalSteps);
+
         editor.putLong("currency", currency);
         editor.putLong("streak", streak);
         editor.apply();
+
+        Log.d("Step Counter", "total steps saved : " + totalSteps);
         Log.d("Step Counter", "Steps saved: " + previousTotalSteps);
         Log.d("Step Counter", "Saved daily steps");
         Log.d("Step Counter", "Saved currency: " + currency);
@@ -337,6 +342,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         } else {
             dailySteps  = new HashMap<>();
         }
+
         Log.d("Step Counter", "Loaded steps: " + previousTotalSteps);
         Log.d("Step Counter", "Loaded daily steps");
         Log.d("Step Counter", "Loaded currency: " + currency);

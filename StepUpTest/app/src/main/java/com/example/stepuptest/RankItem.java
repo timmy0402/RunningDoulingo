@@ -9,6 +9,10 @@ public class RankItem {
         this.steps = steps;
     }
 
+    public int compareTo(RankItem other) {
+        return Integer.compare(other.steps, this.steps);
+    }
+
     public String getDate() {
         return name;
     }
