@@ -1,6 +1,9 @@
 package com.example.stepuptest;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
@@ -9,12 +12,19 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.HashMap;
+import java.time.LocalDate;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -26,13 +36,28 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private boolean running = false;
     private float totalSteps = 0f;
     private float previousTotalSteps = 0f;
-
+    private float yesterdaySteps = 0f;
+    private HashMap<String, Integer> dailySteps;
     private float nextGoal = 50f;
+    private long dateTestLong = 0;
+
+    static IntentFilter s_intentFilter;
+
+    static {
+        s_intentFilter = new IntentFilter();
+        s_intentFilter.addAction(Intent.ACTION_TIME_TICK);
+        s_intentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
+        s_intentFilter.addAction(Intent.ACTION_TIME_CHANGED);
+    }
 
     // UI Component
     private TextView stepsTakenTextView;
 
     private TextView stepGoalTextView;
+
+    private TextView dateTextView;
+
+    private TextView dailyStepsTextView;
 
     private static final int PERMISSION_REQUEST_ACTIVITY_RECOGNITION = 100;
 
@@ -53,6 +78,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         stepGoalTextView = findViewById(R.id.tv_stepGoal);
 
+        dateTextView = findViewById(R.id.tv_date);
+
+        dailyStepsTextView = findViewById(R.id.tv_dailySteps);
+
         // Define sensor and sensor manager
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager != null) {
@@ -66,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         loadData();
         resetSteps();
+        testDate();
     }
 
     // Register sensor when activity starts
@@ -102,17 +132,41 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             totalSteps = event.values[0];
             int currentSteps = (int) (totalSteps - previousTotalSteps);
             stepsTakenTextView.setText(String.valueOf(currentSteps));
+
             int remainingSteps = (int) (nextGoal - currentSteps);
             String goal = (remainingSteps > 0) ? Integer.toString(currentSteps) + "/" + Integer.toString((int)nextGoal) : "Achieved!";
             if (remainingSteps < -20) {
                 nextGoal = truncate((int)(50 * Math.sqrt(nextGoal + 2)), 2);
             }
             stepGoalTextView.setText(goal);
+
+            int todaySteps = (int) (currentSteps - yesterdaySteps);
+            dailyStepsTextView.setText(String.valueOf(todaySteps));
         }
     }
 
+    private final BroadcastReceiver m_timeChangedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+
+            if (action.equals(Intent.ACTION_TIME_CHANGED) ||
+                    action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
+                changeDate();
+            }
+        }
+    };
+
     private float truncate(int num, int degree) {
         return (int) (Math.floor(num / Math.pow(10.0, degree)) * ((int) Math.pow(10, degree)));
+    }
+
+    private void changeDate() {
+        int today = (int) (((int) (totalSteps - previousTotalSteps)) - yesterdaySteps);
+        dailySteps.put(LocalDate.now().plusDays(dateTestLong).toString(), today);
+        dateTextView.setText(String.valueOf(LocalDate.now().plusDays(dateTestLong)));
+        dailyStepsTextView.setText("0");
+        yesterdaySteps = totalSteps - previousTotalSteps;
     }
 
     // Handle resume event
@@ -121,6 +175,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onResume();
         running = true;
         registerSensor();
+        registerReceiver(m_timeChangedReceiver, s_intentFilter);
+        dateTextView.setText(String.valueOf(LocalDate.now()));
     }
 
     // Handle pause event
@@ -128,6 +184,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onPause() {
         super.onPause();
         running = false;
+        unregisterReceiver(m_timeChangedReceiver);
     }
 
     // Handle long press to reset steps
@@ -139,8 +196,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         stepsTakenTextView.setOnLongClickListener(v -> {
             previousTotalSteps = totalSteps;
             stepsTakenTextView.setText("0");
+            dailyStepsTextView.setText("0");
+            nextGoal = 50f;
             saveData();
             return true;
+        });
+    }
+
+    private void testDate() {
+        stepsTakenTextView.setOnClickListener(v -> {
+            ++dateTestLong;
+            changeDate();
         });
     }
 
@@ -148,16 +214,29 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String hashMapString = gson.toJson(dailySteps);
+        editor.putString("hashString", hashMapString);
         editor.putFloat("key1", previousTotalSteps);
         editor.apply();
         Log.d("Step Counter", "Steps saved: " + previousTotalSteps);
+        Log.d("Step Counter", "Saved daily steps");
     }
 
     // Load step count
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
         previousTotalSteps = sharedPreferences.getFloat("key1", 0f);
+        String storedHash = sharedPreferences.getString("hashString", "River stone");
+        java.lang.reflect.Type type = new TypeToken<HashMap<String, Integer>>(){}.getType();
+        if (!storedHash.equals("River stone")) {
+            Gson gson = new Gson();
+            dailySteps = gson.fromJson(storedHash, type);
+        } else {
+            dailySteps  = new HashMap<>();
+        }
         Log.d("Step Counter", "Loaded steps: " + previousTotalSteps);
+        Log.d("Step Counter", "Loaded daily steps");
     }
 
     // Handle permission request results

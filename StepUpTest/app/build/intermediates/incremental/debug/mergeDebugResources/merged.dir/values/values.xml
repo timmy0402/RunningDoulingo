@@ -703,6 +703,7 @@
     <color name="error_color_material_light">#ff5722</color>
     <color name="foreground_material_dark">@android:color/white</color>
     <color name="foreground_material_light">@android:color/black</color>
+    <color name="gray">#808080</color>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
     <color name="m3_ref_palette_black">#ff000000</color>
@@ -2133,7 +2134,9 @@
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_home">Home</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_login">Login</string>
+    <string name="title_power_up">Power Up</string>
+    <string name="title_rank">Rank</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>
