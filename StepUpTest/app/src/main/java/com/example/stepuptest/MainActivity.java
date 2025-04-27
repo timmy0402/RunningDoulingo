@@ -280,6 +280,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onResume() {
         super.onResume();
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+        // TODO:REMOVE
+        currency++;
         running = true;
         registerSensor();
         registerReceiver(m_timeChangedReceiver, s_intentFilter);
