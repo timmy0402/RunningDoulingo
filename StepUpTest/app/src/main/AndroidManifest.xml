@@ -24,10 +24,8 @@
             android:name=".Rank"
             android:exported="false" />
         <activity
-            android:name=".Account"
-            android:exported="false" />
-        <activity
             android:name=".Home"
+            android:label="@string/title_home"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

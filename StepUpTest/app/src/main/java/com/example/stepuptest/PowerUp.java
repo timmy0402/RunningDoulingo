@@ -2,6 +2,7 @@ package com.example.stepuptest;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,11 +19,53 @@ public class PowerUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_power_up);
+//        setContentView(R.layout.fragment_dashboard);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
+        // Button1: Pause Button
+        Button button1 = findViewById(R.id.button1);
+        button1.setOnClickListener(v -> {
+            // Create Intent to start SecondActivity
+//            Intent intent = new Intent(MainActivity.this, PowerUp.class);
+//            // Start the activity
+//            startActivity(intent);
+
+            Intent intent = new Intent(PowerUp.this, Login.class);
+            startActivity(intent);
+        });
+
+        // Button2: Koala Button
+        Button button2 = findViewById(R.id.button2);
+        button2.setOnClickListener(v -> {
+            // Create Intent to start SecondActivity
+//            Intent intent = new Intent(MainActivity.this, PowerUp.class);
+//            // Start the activity
+//            startActivity(intent);
+        });
+
+        // Button3: x1.5
+        Button button3 = findViewById(R.id.button3);
+        button3.setOnClickListener(v -> {
+            // Create Intent to start SecondActivity
+//            Intent intent = new Intent(MainActivity.this, PowerUp.class);
+//            // Start the activity
+//            startActivity(intent);
+        });
+
+        // Button4: x3
+        Button button4 = findViewById(R.id.button4);
+        button4.setOnClickListener(v -> {
+            // Create Intent to start SecondActivity
+//            Intent intent = new Intent(MainActivity.this, PowerUp.class);
+//            // Start the activity
+//            startActivity(intent);
+        });
+
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.power_up);
@@ -36,16 +79,19 @@ public class PowerUp extends AppCompatActivity {
                 return true;
             } else if (id == R.id.power_up) {
                 return true;
+
             } else if (id == R.id.login) {
                 startActivity(new Intent(getApplicationContext(), Login.class));
                 overridePendingTransition(0, 0);
                 return true;
-            } else if (id == R.id.rank) {
+            }
+            else if (id == R.id.rank) {
                 startActivity(new Intent(getApplicationContext(), Rank.class));
                 overridePendingTransition(0, 0);
                 return true;
             }
             return false;
         });
+
     }
 }

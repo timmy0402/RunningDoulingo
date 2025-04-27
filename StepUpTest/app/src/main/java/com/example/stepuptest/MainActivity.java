@@ -16,17 +16,24 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
 import android.content.Intent;
+
+import com.example.stepuptest.databinding.ActivityHomeBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.time.LocalDate;
+import java.util.Locale;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -78,7 +85,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private static final int PERMISSION_REQUEST_ACTIVITY_RECOGNITION = 100;
 
-    private Button nextActivityButton;
+    private ActivityHomeBinding binding;
+
+
+    private Button homeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +128,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         resetSteps();
         testDate();
 
+        homeButton = findViewById(R.id.button);
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Home.class));
+            }
+        });
+
         BottomNavigationView bottomNavigationView=findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
 
@@ -127,21 +144,28 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
              if (id == R.id.navigation_home) {
                  return true;
              } else if (id == R.id.power_up) {
-                 startActivity(new Intent(getApplicationContext(), PowerUp.class));
+                 Intent intent = new Intent(getApplicationContext(), PowerUp.class);
+                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                 startActivityIfNeeded(intent,0);
                  overridePendingTransition(0, 0);
                  return true;
              } else if (id == R.id.login) {
-                 startActivity(new Intent(getApplicationContext(), Login.class));
+                 Intent intent = new Intent(getApplicationContext(), Login.class);
+                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                 startActivityIfNeeded(intent,0);
                  overridePendingTransition(0, 0);
                  return true;
              }
              else if (id == R.id.rank) {
-                 startActivity(new Intent(getApplicationContext(), Rank.class));
+                 Intent intent = new Intent(getApplicationContext(), Rank.class);
+                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                 startActivityIfNeeded(intent,0);
                  overridePendingTransition(0, 0);
                  return true;
              }
              return false;
         });
+
 
     }
 
