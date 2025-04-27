@@ -43,6 +43,7 @@ public class Home extends AppCompatActivity {
         } else {
             dailySteps  = new HashMap<>();
         }
+        Log.d("Step Count", storedHash);
 
         Log.d("Step Counter", "Loaded daily steps");
 

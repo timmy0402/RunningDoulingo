@@ -303,9 +303,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         );
 
         stepsTakenTextView.setOnLongClickListener(v -> {
-            previousTotalSteps = totalSteps;
             SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
             sharedPreferences.edit().clear().commit();
+            previousTotalSteps = totalSteps;
+            streak = 0;
+            multiplier = 1f;
+            streakMultiplier = 1;
+            pauseStreak = false;
+            finishedGoal = false;
+            finishedStreak = false;
+            yesterdaySteps = 0f;
+            nextGoal = 50f;
+            dailyGoal = 10f;
             dateTestLong = 0;
             currency = 0;
             saveData();
