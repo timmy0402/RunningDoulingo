@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         registerSensor();
         registerReceiver(m_timeChangedReceiver, s_intentFilter);
         currencyTextView.setText(String.valueOf(currency));
-        dateTextView.setText(String.valueOf(LocalDate.now()));
+        dateTextView.setText(String.valueOf(LocalDate.now().plusDays(dateTestLong)));
         loadData();
     }
 
@@ -303,10 +303,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         stepsTakenTextView.setOnLongClickListener(v -> {
             previousTotalSteps = totalSteps;
-            stepsTakenTextView.setText("0");
-            dailyStepsTextView.setText("0");
-            nextGoal = 50f;
-            dailyGoal = 10f;
+            SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+            sharedPreferences.edit().clear().commit();
+            currency = 0;
             saveData();
             return true;
         });
@@ -370,7 +369,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         yesterdaySteps = sharedPreferences.getFloat("yesterdaySteps", 0f);
         nextGoal = sharedPreferences.getFloat("nextGoal", 50f);
         dailyGoal = sharedPreferences.getFloat("dailyGoal", 10f);
-        dateTestLong = sharedPreferences.getLong("dateTestGoal", 0);
+        dateTestLong = sharedPreferences.getLong("dateTestLong", 0);
         String storedHash = sharedPreferences.getString("hashString", "River stone");
         java.lang.reflect.Type type = new TypeToken<HashMap<String, String>>(){}.getType();
         if (!storedHash.equals("River stone")) {
@@ -388,6 +387,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Log.d("Step Counter", "Loaded pause streak: " + pauseStreak);
         Log.d("Step Counter", "Loaded finished goal: " + finishedGoal);
         Log.d("Step Counter", "Loaded finished streak: " + finishedStreak);
+        Log.d("Step Counter", "Loaded next goal: " + nextGoal);
+        Log.d("Step Counter", "Loaded daily goal: " + dailyGoal);
+        Log.d("Step Counter", "Loaded date test: " + dateTestLong);
         Log.d("Step Counter", "Loaded yesterday steps: " + yesterdaySteps);
     }
 
