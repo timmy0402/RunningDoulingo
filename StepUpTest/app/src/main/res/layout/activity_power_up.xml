@@ -33,7 +33,6 @@
         android:layout_height="0dp"
         android:layout_marginTop="180dp"
         android:drawableTop="@drawable/baseline_pause_24"
-        android:drawablePadding="10dp"
         android:gravity="center"
         android:textSize="32sp"
         app:layout_constraintEnd_toStartOf="@id/button2"
@@ -48,7 +47,7 @@
         android:drawableLeft="@drawable/ic_coin"
         android:fontFamily="@font/bowlby_one"
         android:gravity="center_vertical"
-        android:text="10"
+        android:text="50"
         android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@id/button1"
 
@@ -104,7 +103,7 @@
         android:drawableLeft="@drawable/ic_coin"
         android:fontFamily="@font/bowlby_one"
         android:gravity="center_vertical"
-        android:text="25"
+        android:text="10"
         android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@id/button3"
 
