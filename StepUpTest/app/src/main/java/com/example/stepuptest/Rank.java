@@ -70,24 +70,20 @@ public class Rank extends AppCompatActivity {
             return false;
         });
     }
-
     private void loadDailySteps() {
-        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-        float totalSteps = sharedPreferences.getFloat("totalSteps", 0f);
-        float previousTotalSteps = sharedPreferences.getFloat("previousTotalSteps", 0f);
+        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        String storedHash = sharedPreferences.getString("hashString", null);
         rankList = new ArrayList<>();
 
-        String todayDate = java.time.LocalDate.now().toString();
-        rankList.add(new RankItem(todayDate, (int) (totalSteps - previousTotalSteps)));
-    }
+        if (storedHash != null) {
+            Gson gson = new Gson();
+            Type type = new TypeToken<HashMap<String, Integer>>() {}.getType();
+            HashMap<String, Integer> dailySteps = gson.fromJson(storedHash, type);
 
-//    private void loadDailySteps() {
-//        float totalSteps = getIntent().getFloatExtra("totalSteps", 0f);
-//        float previousTotalSteps = getIntent().getFloatExtra("previousTotalSteps", 0f);
-//        rankList = new ArrayList<>();
-//
-//        // Just add today's date and total steps
-//        String todayDate = java.time.LocalDate.now().toString();
-//        rankList.add(new RankItem(todayDate, (int) (totalSteps - previousTotalSteps)));
-//    }
+            for (String date : dailySteps.keySet()) {
+                int steps = dailySteps.get(date);
+                rankList.add(new RankItem(date, steps));
+            }
+        }
+    }
 }
