@@ -80,35 +80,30 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         resetSteps();
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.nav_view);
-        bottomNavigationView.setSelectedItemId(R.id.navigation_dashboard);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
              int id = item.getItemId();
 
              if (id == R.id.navigation_home) {
-                 startActivity(new Intent(getApplicationContext(), Home.class));
+                 return true;
+             } else if (id == R.id.power_up) {
+                 startActivity(new Intent(getApplicationContext(), PowerUp.class));
                  overridePendingTransition(0, 0);
                  return true;
-             } else if (id == R.id.navigation_dashboard) {
+             } else if (id == R.id.login) {
+                 startActivity(new Intent(getApplicationContext(), Login.class));
+                 overridePendingTransition(0, 0);
                  return true;
-             } else if (id == R.id.navigation_notifications) {
-                 startActivity(new Intent(getApplicationContext(), Home.class));
+             }
+             else if (id == R.id.rank) {
+                 startActivity(new Intent(getApplicationContext(), Rank.class));
                  overridePendingTransition(0, 0);
                  return true;
              }
              return false;
         });
 
-        // Initialize button using findViewById
-        nextActivityButton = findViewById(R.id.button);
-
-        // Set click listener for the button
-        nextActivityButton.setOnClickListener(v -> {
-            // Create Intent to start SecondActivity
-            Intent intent = new Intent(MainActivity.this, Home.class);
-            // Start the activity
-            startActivity(intent);
-        });
     }
 
     // Register sensor when activity starts
