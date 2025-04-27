@@ -31,10 +31,3 @@ replay_pid*
 **/local.properties
 
 **/build
-**/app/build
-
-**/build
-**/app/build
-
-# Not adding build file
-**/app/build/
