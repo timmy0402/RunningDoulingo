@@ -58,18 +58,24 @@ public class Login extends AppCompatActivity {
             int id = item.getItemId();
 
             if (id == R.id.navigation_home) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(intent,0);
                 overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.power_up) {
-                startActivity(new Intent(getApplicationContext(), PowerUp.class));
+                Intent intent = new Intent(getApplicationContext(), PowerUp.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(intent,0);
                 overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.login) {
                 return true;
             }
             else if (id == R.id.rank) {
-                startActivity(new Intent(getApplicationContext(), Rank.class));
+                Intent intent = new Intent(getApplicationContext(), Rank.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(intent,0);
                 overridePendingTransition(0, 0);
                 return true;
             }

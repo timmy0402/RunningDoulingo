@@ -66,6 +66,8 @@
         app:layout_constraintTop_toBottomOf="@id/passwordField"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/Koala_fan"
+
         android:layout_marginTop="48dp"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

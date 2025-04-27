@@ -60,7 +60,6 @@ public class PowerUp extends AppCompatActivity {
 //            Intent intent = new Intent(PowerUp.this, Login.class);
 //            startActivity(intent);
         });
-
         // Button2: Koala Button
         Button button2 = findViewById(R.id.button2);
         button2.setOnClickListener(v -> {
@@ -116,19 +115,25 @@ public class PowerUp extends AppCompatActivity {
             int id = item.getItemId();
 
             if (id == R.id.navigation_home) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(intent,0);
                 overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.power_up) {
                 return true;
 
             } else if (id == R.id.login) {
-                startActivity(new Intent(getApplicationContext(), Login.class));
+                Intent intent = new Intent(getApplicationContext(), Login.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(intent,0);
                 overridePendingTransition(0, 0);
                 return true;
             }
             else if (id == R.id.rank) {
-                startActivity(new Intent(getApplicationContext(), Rank.class));
+                Intent intent = new Intent(getApplicationContext(), Rank.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(intent,0);
                 overridePendingTransition(0, 0);
                 return true;
             }
@@ -148,7 +153,7 @@ public class PowerUp extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
         long currency = sharedPreferences.getLong("currency", 0);
         Log.d("Step Counter", "Loaded currency: " + currency);
-        TextView curr = findViewById(R.id.shop_currency);
+        TextView curr = findViewById(R.id.currency);
         curr.setText(String.valueOf(currency));
         return currency;
     }
