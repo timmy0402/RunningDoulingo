@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,37 +18,40 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class Login extends AppCompatActivity {
     EditText editTextUsername, editTextPassword;
     Button buttonLogin;
-
+    BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        ImageView imageView = findViewById(R.id.imageViewIcon);
+        imageView.setImageResource(R.drawable.ic_launcher_foreground);
 
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
-                                           @Override
-                                           public void onClick(View v) {
-                                               String username = editTextUsername.getText().toString();
-                                               String password = editTextPassword.getText().toString();
+           @Override
+           public void onClick(View v) {
+               String username = editTextUsername.getText().toString();
+               String password = editTextPassword.getText().toString();
 
-                                               if (username.equals("admin") && password.equals("1234")) {
-                                                   Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                                   // Intent to open another page
-                                                   // startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+               if (username.equals("admin") && password.equals("1234")) {
+                   Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                   // Intent to open another page
+                   // startActivity(new Intent(LoginActivity.this, HomeActivity.class));
 
-                                                   startActivity(new Intent(Login.this, Home.class));
+                   startActivity(new Intent(Login.this, Home.class));
 
-                                               } else {
-                                                   Toast.makeText(Login.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
-                                               }
-                                           }
-                                       }
+               } else {
+                   Toast.makeText(Login.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
+               }
+           }
+       }
         );
 
-        BottomNavigationView bottomNavigationView=findViewById(R.id.nav_view);
+        bottomNavigationView=findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.login);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -72,5 +76,10 @@ public class Login extends AppCompatActivity {
             return false;
         });
 
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        bottomNavigationView.setSelectedItemId(R.id.login);
     }
 }
