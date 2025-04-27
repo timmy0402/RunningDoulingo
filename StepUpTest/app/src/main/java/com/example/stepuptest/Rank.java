@@ -1,5 +1,6 @@
 package com.example.stepuptest;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class Rank extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.rank_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        saveData(0);
 
         loadDailySteps();
 
@@ -66,7 +68,6 @@ public class Rank extends AppCompatActivity {
 
     @Override
     protected void onStart(){
-        loadDailySteps();
         super.onStart();
 
         adapter = new RankAdapter(rankList);
@@ -76,7 +77,6 @@ public class Rank extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        loadDailySteps();
         super.onResume();
 
         bottomNavigationView.setSelectedItemId(R.id.rank);
@@ -86,23 +86,42 @@ public class Rank extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        loadDailySteps();
         super.onPause();
-
 
         adapter = new RankAdapter(rankList);
         recyclerView.setAdapter(adapter);
     }
 
+    private void saveData(int newStep) {
+        SharedPreferences rankBoardOnly = getSharedPreferences("rankBord", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = rankBoardOnly.edit();
+        editor.putInt("UserStep", newStep);
+        editor.apply();
+
+        Log.d("Rank", "new step as save to the database" + newStep);
+    }
+
+    private int loadData() {
+        SharedPreferences rankBoardOnly = getSharedPreferences("rankBord", Context.MODE_PRIVATE);
+        int reUserStep = rankBoardOnly.getInt("UserStep", 0);
+        Log.d("Rank", "Load from the database for userStep" + reUserStep);
+        return   reUserStep;
+    }
 
     private void loadDailySteps() {
+
         Intent intent = getIntent();
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
         float totalSteps = sharedPreferences.getFloat("key2_total_step", 0f);
         float previousTotalSteps = sharedPreferences.getFloat("key1", 0f);
 
-        Log.d("Step Counter", "Loaded total steps : " + totalSteps);
-        Log.d("Step Counter", "Loaded steps: " + previousTotalSteps);
+        float userWalkedSteps = totalSteps - previousTotalSteps;
+
+        int newUserWalkedSteps = loadData() + (int) userWalkedSteps;
+
+        saveData(newUserWalkedSteps);
+
+        Log.d("Rank", "New step : " + newUserWalkedSteps);
 
 
         rankList = new ArrayList<>();
@@ -111,7 +130,7 @@ public class Rank extends AppCompatActivity {
         rankList.add(new RankItem("Anoop", 134));
         rankList.add(new RankItem("Dudu", 20));
         rankList.add(new RankItem("Mario", 1));
-        rankList.add(new RankItem("MyKoala", (int) (totalSteps - previousTotalSteps)));
+        rankList.add(new RankItem("MyKoala", newUserWalkedSteps));
 
         rankList.sort(RankItem::compareTo);
     }
