@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private float totalSteps = 0f;
     private float previousTotalSteps = 0f;
     private float yesterdaySteps = 0f;
-    private HashMap<String, Integer> dailySteps;
+    private HashMap<String, String> dailySteps;
     private float nextGoal = 50f;
     private float dailyGoal = 10f;
     private long dateTestLong = 0;
@@ -61,6 +61,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private long streak = 0;
     private boolean finishedStreak = false;
     private boolean finishedGoal = false;
+    private float multiplier = 1f;
+    private int streakMultiplier = 1;
+    private int deg = 2;
+    private boolean pauseStreak = false;
 
 
     static IntentFilter s_intentFilter;
@@ -87,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private ActivityHomeBinding binding;
 
-
+    BottomNavigationView bottomNavigationView;
     private Button homeButton;
 
     @Override
@@ -110,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         dateTextView = findViewById(R.id.tv_date);
 
         dailyStepsTextView = findViewById(R.id.tv_dailySteps);
+
         currencyTextView = findViewById(R.id.tv_currency);
 
         // Define sensor and sensor manager
@@ -135,35 +140,35 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
-        BottomNavigationView bottomNavigationView=findViewById(R.id.nav_view);
+        bottomNavigationView=findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
-             int id = item.getItemId();
+            int id = item.getItemId();
 
-             if (id == R.id.navigation_home) {
-                 return true;
-             } else if (id == R.id.power_up) {
-                 Intent intent = new Intent(getApplicationContext(), PowerUp.class);
-                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                 startActivityIfNeeded(intent,0);
-                 overridePendingTransition(0, 0);
-                 return true;
-             } else if (id == R.id.login) {
-                 Intent intent = new Intent(getApplicationContext(), Login.class);
-                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                 startActivityIfNeeded(intent,0);
-                 overridePendingTransition(0, 0);
-                 return true;
-             }
-             else if (id == R.id.rank) {
-                 Intent intent = new Intent(getApplicationContext(), Rank.class);
-                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                 startActivityIfNeeded(intent,0);
-                 overridePendingTransition(0, 0);
-                 return true;
-             }
-             return false;
+            if (id == R.id.navigation_home) {
+                return true;
+            } else if (id == R.id.power_up) {
+                Intent intent = new Intent(getApplicationContext(), PowerUp.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(intent,0);
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (id == R.id.login) {
+                Intent intent = new Intent(getApplicationContext(), Login.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(intent,0);
+                overridePendingTransition(0, 0);
+                return true;
+            }
+            else if (id == R.id.rank) {
+                Intent intent = new Intent(getApplicationContext(), Rank.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(intent,0);
+                overridePendingTransition(0, 0);
+                return true;
+            }
+            return false;
         });
 
 
@@ -172,17 +177,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // Register sensor when activity starts
     @Override
     protected void onStart() {
-        saveData();
         super.onStart();
         registerSensor();
+        loadData();
     }
 
     // Unregister sensor when activity stops
     @Override
     protected void onStop() {
-        saveData();
         super.onStop();
         sensorManager.unregisterListener(this);
+        saveData();
     }
 
     // Register step counter sensor
@@ -208,10 +213,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             int remainingSteps = (int) (nextGoal - currentSteps);
             String goal = (remainingSteps > 0) ? Integer.toString(currentSteps) + "/" + Integer.toString((int)nextGoal) : "Achieved!";
-            if (remainingSteps < -10) {
-                currency += (10 * streak / 10);
+            if (remainingSteps < -10 && !finishedGoal) {
+                currency += (10 * streak / 5);
                 currencyTextView.setText(String.valueOf(currency));
-                nextGoal = truncate((int)(50 * Math.sqrt(nextGoal + 2)), 2);
+                nextGoal = truncate((int)(50 * Math.sqrt(nextGoal + deg)), deg);
                 finishedGoal = true;
             }
             stepGoalTextView.setText(goal);
@@ -220,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             int dailyRemaining = (int) (dailyGoal - todaySteps);
             String currGoal = (dailyRemaining > 0) ? Integer.toString(todaySteps) + "/" + Integer.toString((int) dailyGoal) : "Streak! " + Long.toString(streak);
             if (dailyRemaining <= 0 && !finishedStreak) {
-                currency += streak;
+                currency += streak * streakMultiplier;
                 ++streak;
                 currencyTextView.setText(String.valueOf(currency));
                 finishedStreak = true;
@@ -247,39 +252,48 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private void changeDate() {
         int today = (int) (((int) (totalSteps - previousTotalSteps)) - yesterdaySteps);
-        currency += today / (long) Math.pow(10, 1);
-        dailySteps.put(LocalDate.now().plusDays(dateTestLong).toString(), today);
+        currency += (int) (((double)today / (long) Math.pow(10, deg - 1)) * multiplier);
+        dailySteps.put(LocalDate.now().plusDays(dateTestLong).toString(), Integer.toString(today) + "/" + Integer.toString((int) dailyGoal));
         dateTextView.setText(String.valueOf(LocalDate.now().plusDays(dateTestLong)));
         currencyTextView.setText(String.valueOf(currency));
-        dailyStepsTextView.setText("0");
         if (finishedStreak) {
             finishedStreak = false;
+        } else if (pauseStreak) {
+            pauseStreak = false;
+        } else {
+            streak = 0;
         }
         if (finishedGoal) {
             dailyGoal += 10f;
             finishedGoal = false;
         }
+        String next = "0/" + String.valueOf((int) dailyGoal);
+        dailyStepsTextView.setText(next);
+        streakMultiplier = 1;
+        multiplier = 1;
         yesterdaySteps = totalSteps - previousTotalSteps;
     }
 
     // Handle resume event
     @Override
     protected void onResume() {
-        saveData();
         super.onResume();
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
         running = true;
         registerSensor();
         registerReceiver(m_timeChangedReceiver, s_intentFilter);
-        dateTextView.setText(String.valueOf(LocalDate.now()));
+        currencyTextView.setText(String.valueOf(currency));
+        dateTextView.setText(String.valueOf(LocalDate.now().plusDays(dateTestLong)));
+        loadData();
     }
 
     // Handle pause event
     @Override
     protected void onPause() {
-        saveData();
         super.onPause();
         running = false;
         unregisterReceiver(m_timeChangedReceiver);
+        saveData();
     }
 
     // Handle long press to reset steps
@@ -289,11 +303,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         );
 
         stepsTakenTextView.setOnLongClickListener(v -> {
+            SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+            sharedPreferences.edit().clear().commit();
             previousTotalSteps = totalSteps;
-            stepsTakenTextView.setText("0");
-            dailyStepsTextView.setText("0");
+            streak = 0;
+            multiplier = 1f;
+            streakMultiplier = 1;
+            pauseStreak = false;
+            finishedGoal = false;
+            finishedStreak = false;
+            yesterdaySteps = 0f;
             nextGoal = 50f;
             dailyGoal = 10f;
+            dateTestLong = 0;
+            currency = 0;
             saveData();
             return true;
         });
@@ -314,18 +337,33 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         String hashMapString = gson.toJson(dailySteps);
         editor.putString("hashString", hashMapString);
         editor.putFloat("key1", previousTotalSteps);
-
-        editor.putFloat("key2_total_step", totalSteps);
-
         editor.putLong("currency", currency);
         editor.putLong("streak", streak);
+        editor.putFloat("multiplier", multiplier);
+        editor.putInt("streakMultiplier", streakMultiplier);
+        editor.putBoolean("pauseStreak", pauseStreak);
+        editor.putBoolean("finishedGoal", finishedGoal);
+        editor.putBoolean("finishedStreak", finishedStreak);
+        editor.putFloat("yesterdaySteps", yesterdaySteps);
+        editor.putFloat("nextGoal", nextGoal);
+        editor.putFloat("dailyGoal", dailyGoal);
+        editor.putLong("dateTestLong", dateTestLong);
+        editor.putFloat("key2_total_step", totalSteps);
         editor.apply();
-
-        Log.d("Step Counter", "total steps saved : " + totalSteps);
         Log.d("Step Counter", "Steps saved: " + previousTotalSteps);
         Log.d("Step Counter", "Saved daily steps");
         Log.d("Step Counter", "Saved currency: " + currency);
         Log.d("Step Counter", "Saved streak: " + streak);
+        Log.d("Step Counter", "Saved multiplier: " + multiplier);
+        Log.d("Step Counter", "Saved streak multiplier: " + streakMultiplier);
+        Log.d("Step Counter", "Saved pause streak: " + pauseStreak);
+        Log.d("Step Counter", "Saved finished goal: " + finishedGoal);
+        Log.d("Step Counter", "Saved finished streak: " + finishedStreak);
+        Log.d("Step Counter", "Saved yesterday steps: " + yesterdaySteps);
+        Log.d("Step Counter", "Saved next goal: " + nextGoal);
+        Log.d("Step Counter", "Saved daily goal: " + dailyGoal);
+        Log.d("Step Counter", "Saved date test: " + dateTestLong);
+        Log.d("Step Counter", "total steps saved : " + totalSteps);
     }
 
     // Load step count
@@ -334,19 +372,36 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         previousTotalSteps = sharedPreferences.getFloat("key1", 0f);
         currency = sharedPreferences.getLong("currency", 0);
         streak = sharedPreferences.getLong("streak", 0);
+        multiplier = sharedPreferences.getFloat("multiplier", 1f);
+        streakMultiplier = sharedPreferences.getInt("streakMultiplier", 1);
+        pauseStreak = sharedPreferences.getBoolean("pauseStreak", false);
+        finishedGoal = sharedPreferences.getBoolean("finishedGoal", false);
+        finishedStreak = sharedPreferences.getBoolean("finishedStreak", false);
+        yesterdaySteps = sharedPreferences.getFloat("yesterdaySteps", 0f);
+        nextGoal = sharedPreferences.getFloat("nextGoal", 50f);
+        dailyGoal = sharedPreferences.getFloat("dailyGoal", 10f);
+        dateTestLong = sharedPreferences.getLong("dateTestLong", 0);
         String storedHash = sharedPreferences.getString("hashString", "River stone");
-        java.lang.reflect.Type type = new TypeToken<HashMap<String, Integer>>(){}.getType();
+        java.lang.reflect.Type type = new TypeToken<HashMap<String, String>>(){}.getType();
         if (!storedHash.equals("River stone")) {
             Gson gson = new Gson();
             dailySteps = gson.fromJson(storedHash, type);
         } else {
             dailySteps  = new HashMap<>();
         }
-
         Log.d("Step Counter", "Loaded steps: " + previousTotalSteps);
         Log.d("Step Counter", "Loaded daily steps");
         Log.d("Step Counter", "Loaded currency: " + currency);
         Log.d("Step Counter", "Loaded streak: " + streak);
+        Log.d("Step Counter", "Loaded multiplier: " + multiplier);
+        Log.d("Step Counter", "Loaded streak multiplier: " + streakMultiplier);
+        Log.d("Step Counter", "Loaded pause streak: " + pauseStreak);
+        Log.d("Step Counter", "Loaded finished goal: " + finishedGoal);
+        Log.d("Step Counter", "Loaded finished streak: " + finishedStreak);
+        Log.d("Step Counter", "Loaded next goal: " + nextGoal);
+        Log.d("Step Counter", "Loaded daily goal: " + dailyGoal);
+        Log.d("Step Counter", "Loaded date test: " + dateTestLong);
+        Log.d("Step Counter", "Loaded yesterday steps: " + yesterdaySteps);
     }
 
     // Handle permission request results
@@ -365,4 +420,5 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
+
 }

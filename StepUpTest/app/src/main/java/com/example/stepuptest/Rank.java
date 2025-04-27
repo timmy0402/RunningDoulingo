@@ -1,5 +1,6 @@
 package com.example.stepuptest;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ public class Rank extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RankAdapter adapter;
     private List<RankItem> rankList;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,7 @@ public class Rank extends AppCompatActivity {
         adapter = new RankAdapter(rankList);
         recyclerView.setAdapter(adapter);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
+        bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.rank);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -78,7 +80,7 @@ public class Rank extends AppCompatActivity {
         loadDailySteps();
         super.onResume();
 
-
+        bottomNavigationView.setSelectedItemId(R.id.rank);
         adapter = new RankAdapter(rankList);
         recyclerView.setAdapter(adapter);
     }
@@ -88,18 +90,19 @@ public class Rank extends AppCompatActivity {
         loadDailySteps();
         super.onPause();
 
-
         adapter = new RankAdapter(rankList);
         recyclerView.setAdapter(adapter);
     }
 
-
     private void loadDailySteps() {
+
         Intent intent = getIntent();
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
         float totalSteps = sharedPreferences.getFloat("key2_total_step", 0f);
+        float previousTotalSteps = sharedPreferences.getFloat("key1", 0f);
 
         Log.d("Step Counter", "Loaded total steps : " + totalSteps);
+        Log.d("Step Counter", "Loaded steps: " + previousTotalSteps);
 
 
         rankList = new ArrayList<>();
@@ -108,7 +111,7 @@ public class Rank extends AppCompatActivity {
         rankList.add(new RankItem("Anoop", 134));
         rankList.add(new RankItem("Dudu", 20));
         rankList.add(new RankItem("Mario", 1));
-        rankList.add(new RankItem("MyKoala", (int) (totalSteps)));
+        rankList.add(new RankItem("MyKoala", (int) (totalSteps - previousTotalSteps)));
 
         rankList.sort(RankItem::compareTo);
     }

@@ -1,8 +1,13 @@
 package com.example.stepuptest;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,11 +17,19 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.time.LocalDate;
+
 public class PowerUp extends AppCompatActivity {
+
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //ImageView imageView = findViewById(R.id.imageViewIcon_power);
+        //imageView.setImageResource(R.drawable.ic_main);
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_power_up);
 //        setContentView(R.layout.fragment_dashboard);
@@ -30,13 +43,22 @@ public class PowerUp extends AppCompatActivity {
         // Button1: Pause Button
         Button button1 = findViewById(R.id.button1);
         button1.setOnClickListener(v -> {
+            long currency = getCurrency();
+            if (currency >= 50 && !isPauseStreak()) {
+                currency -= 50;
+                SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putLong("currency", currency);
+                editor.putBoolean("pauseStreak", true);
+                editor.apply();
+                getCurrency();
+            }
             // Create Intent to start SecondActivity
 //            Intent intent = new Intent(MainActivity.this, PowerUp.class);
 //            // Start the activity
+//            startActivity(intent)
+//            Intent intent = new Intent(PowerUp.this, Login.class);
 //            startActivity(intent);
-
-            Intent intent = new Intent(PowerUp.this, Login.class);
-            startActivity(intent);
         });
 
         // Button2: Koala Button
@@ -51,6 +73,16 @@ public class PowerUp extends AppCompatActivity {
         // Button3: x1.5
         Button button3 = findViewById(R.id.button3);
         button3.setOnClickListener(v -> {
+            long currency = getCurrency();
+            if (currency >= 10 && (int)getMultiplier() == 1) {
+                currency -= 10;
+                SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putLong("currency", currency);
+                editor.putFloat("multiplier", 1.5f);
+                editor.apply();
+                getCurrency();
+            }
             // Create Intent to start SecondActivity
 //            Intent intent = new Intent(MainActivity.this, PowerUp.class);
 //            // Start the activity
@@ -60,6 +92,16 @@ public class PowerUp extends AppCompatActivity {
         // Button4: x3
         Button button4 = findViewById(R.id.button4);
         button4.setOnClickListener(v -> {
+            long currency = getCurrency();
+            if (currency >= 25 && getStreakMultiplier() == 1) {
+                currency -= 25;
+                SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putLong("currency", currency);
+                editor.putInt("streakMultiplier", 3);
+                editor.apply();
+                getCurrency();
+            }
             // Create Intent to start SecondActivity
 //            Intent intent = new Intent(MainActivity.this, PowerUp.class);
 //            // Start the activity
@@ -67,7 +109,7 @@ public class PowerUp extends AppCompatActivity {
         });
 
 
-        BottomNavigationView bottomNavigationView=findViewById(R.id.nav_view);
+        bottomNavigationView=findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.power_up);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -92,6 +134,43 @@ public class PowerUp extends AppCompatActivity {
             }
             return false;
         });
+    }
 
+    // Handle resume event
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getCurrency();
+        bottomNavigationView.setSelectedItemId(R.id.power_up);
+    }
+
+    private long getCurrency() {
+        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        long currency = sharedPreferences.getLong("currency", 0);
+        Log.d("Step Counter", "Loaded currency: " + currency);
+        TextView curr = findViewById(R.id.shop_currency);
+        curr.setText(String.valueOf(currency));
+        return currency;
+    }
+
+    private boolean isPauseStreak() {
+        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        boolean pauseStreak = sharedPreferences.getBoolean("pauseStreak", false);
+        Log.d("Step Counter", "Loaded pause streak: " + pauseStreak);
+        return pauseStreak;
+    }
+
+    private float getMultiplier() {
+        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        float multiplier = sharedPreferences.getFloat("multiplier", 1f);
+        Log.d("Step Counter", "Loaded multiplier: " + multiplier);
+        return multiplier;
+    }
+
+    private int getStreakMultiplier() {
+        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        int streakMultiplier = sharedPreferences.getInt("streakMultiplier", 1);
+        Log.d("Step Counter", "Loaded streak multiplier: " + streakMultiplier);
+        return streakMultiplier;
     }
 }
