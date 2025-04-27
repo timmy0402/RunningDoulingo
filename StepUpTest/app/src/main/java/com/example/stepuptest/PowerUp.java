@@ -148,7 +148,7 @@ public class PowerUp extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
         long currency = sharedPreferences.getLong("currency", 0);
         Log.d("Step Counter", "Loaded currency: " + currency);
-        TextView curr = findViewById(R.id.shop_currency);
+        TextView curr = findViewById(R.id.currency);
         curr.setText(String.valueOf(currency));
         return currency;
     }
