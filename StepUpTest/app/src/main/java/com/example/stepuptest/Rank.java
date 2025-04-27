@@ -1,25 +1,18 @@
 package com.example.stepuptest;
 
 import android.content.Intent;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Rank extends AppCompatActivity {
@@ -71,23 +64,42 @@ public class Rank extends AppCompatActivity {
         });
     }
 
-    private void loadDailySteps() {
-        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-        float totalSteps = sharedPreferences.getFloat("totalSteps", 0f);
-        float previousTotalSteps = sharedPreferences.getFloat("previousTotalSteps", 0f);
-        rankList = new ArrayList<>();
+    @Override
+    protected void onStart(){
+        super.onStart();
+        loadDailySteps();
 
-        String todayDate = java.time.LocalDate.now().toString();
-        rankList.add(new RankItem(todayDate, (int) (totalSteps - previousTotalSteps)));
+        adapter = new RankAdapter(rankList);
+        recyclerView.setAdapter(adapter);
+
     }
 
-//    private void loadDailySteps() {
-//        float totalSteps = getIntent().getFloatExtra("totalSteps", 0f);
-//        float previousTotalSteps = getIntent().getFloatExtra("previousTotalSteps", 0f);
-//        rankList = new ArrayList<>();
-//
-//        // Just add today's date and total steps
-//        String todayDate = java.time.LocalDate.now().toString();
-//        rankList.add(new RankItem(todayDate, (int) (totalSteps - previousTotalSteps)));
-//    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadDailySteps();
+
+        adapter = new RankAdapter(rankList);
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        loadDailySteps();
+
+        adapter = new RankAdapter(rankList);
+        recyclerView.setAdapter(adapter);
+    }
+
+
+    private void loadDailySteps() {
+        Intent intent = getIntent();
+        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+        float totalSteps = sharedPreferences.getFloat("key1", 0f);
+        rankList = new ArrayList<>();
+
+        rankList.add(new RankItem("total", (int) (totalSteps)));
+    }
+
 }
