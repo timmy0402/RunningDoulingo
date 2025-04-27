@@ -34,6 +34,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.time.LocalDate;
 import java.util.Locale;
+import java.util.Set;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -307,6 +308,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             sharedPreferences.edit().clear().commit();
             previousTotalSteps = totalSteps;
             streak = 0;
+            dailySteps = new HashMap<>();
             multiplier = 1f;
             streakMultiplier = 1;
             pauseStreak = false;
