@@ -12,28 +12,20 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
 import android.content.Intent;
-
-import com.example.stepuptest.databinding.ActivityHomeBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.time.LocalDate;
-import java.util.Locale;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -53,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private float totalSteps = 0f;
     private float previousTotalSteps = 0f;
     private float yesterdaySteps = 0f;
-    private HashMap<String, String> dailySteps;
+    private HashMap<String, Integer> dailySteps;
     private float nextGoal = 50f;
     private float dailyGoal = 10f;
     private long dateTestLong = 0;
@@ -61,10 +53,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private long streak = 0;
     private boolean finishedStreak = false;
     private boolean finishedGoal = false;
-    private float multiplier = 1f;
-    private int streakMultiplier = 1;
+    public double multiplier = 1;
+    public int streakMultiplier = 1;
     private int deg = 2;
-    private boolean pauseStreak = false;
+    public boolean pauseStreak = false;
 
 
     static IntentFilter s_intentFilter;
@@ -89,10 +81,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private static final int PERMISSION_REQUEST_ACTIVITY_RECOGNITION = 100;
 
-    private ActivityHomeBinding binding;
-
-
-    private Button homeButton;
+    private Button nextActivityButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         dateTextView = findViewById(R.id.tv_date);
 
         dailyStepsTextView = findViewById(R.id.tv_dailySteps);
-
         currencyTextView = findViewById(R.id.tv_currency);
 
         // Define sensor and sensor manager
@@ -133,44 +121,30 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         resetSteps();
         testDate();
 
-        homeButton = findViewById(R.id.button);
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Home.class));
-            }
-        });
-
         BottomNavigationView bottomNavigationView=findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();
+             int id = item.getItemId();
 
-            if (id == R.id.navigation_home) {
-                return true;
-            } else if (id == R.id.power_up) {
-                Intent intent = new Intent(getApplicationContext(), PowerUp.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityIfNeeded(intent,0);
-                overridePendingTransition(0, 0);
-                return true;
-            } else if (id == R.id.login) {
-                Intent intent = new Intent(getApplicationContext(), Login.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityIfNeeded(intent,0);
-                overridePendingTransition(0, 0);
-                return true;
-            }
-            else if (id == R.id.rank) {
-                Intent intent = new Intent(getApplicationContext(), Rank.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityIfNeeded(intent,0);
-                overridePendingTransition(0, 0);
-                return true;
-            }
-            return false;
+             if (id == R.id.navigation_home) {
+                 return true;
+             } else if (id == R.id.power_up) {
+                 startActivity(new Intent(getApplicationContext(), PowerUp.class));
+                 overridePendingTransition(0, 0);
+                 return true;
+             } else if (id == R.id.login) {
+                 startActivity(new Intent(getApplicationContext(), Login.class));
+                 overridePendingTransition(0, 0);
+                 return true;
+             }
+             else if (id == R.id.rank) {
+                 startActivity(new Intent(getApplicationContext(), Rank.class));
+                 overridePendingTransition(0, 0);
+                 return true;
+             }
+             return false;
         });
-
 
     }
 
@@ -179,7 +153,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onStart() {
         super.onStart();
         registerSensor();
-        loadData();
     }
 
     // Unregister sensor when activity stops
@@ -187,7 +160,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onStop() {
         super.onStop();
         sensorManager.unregisterListener(this);
-        saveData();
     }
 
     // Register step counter sensor
@@ -213,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             int remainingSteps = (int) (nextGoal - currentSteps);
             String goal = (remainingSteps > 0) ? Integer.toString(currentSteps) + "/" + Integer.toString((int)nextGoal) : "Achieved!";
-            if (remainingSteps < -10 && !finishedGoal) {
+            if (remainingSteps < -10) {
                 currency += (10 * streak / 5);
                 currencyTextView.setText(String.valueOf(currency));
                 nextGoal = truncate((int)(50 * Math.sqrt(nextGoal + deg)), deg);
@@ -253,12 +225,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private void changeDate() {
         int today = (int) (((int) (totalSteps - previousTotalSteps)) - yesterdaySteps);
         currency += (int) (((double)today / (long) Math.pow(10, deg - 1)) * multiplier);
-        dailySteps.put(LocalDate.now().plusDays(dateTestLong).toString(), Integer.toString(today) + "/" + Integer.toString((int) dailyGoal));
+        dailySteps.put(LocalDate.now().plusDays(dateTestLong).toString(), today);
         dateTextView.setText(String.valueOf(LocalDate.now().plusDays(dateTestLong)));
         currencyTextView.setText(String.valueOf(currency));
         if (finishedStreak) {
             finishedStreak = false;
-        } else if (pauseStreak) {
+        } else if (!pauseStreak) {
             pauseStreak = false;
         } else {
             streak = 0;
@@ -267,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             dailyGoal += 10f;
             finishedGoal = false;
         }
-        String next = "0/" + String.valueOf((int) dailyGoal);
+        String next = "0/" + String.valueOf(dailyGoal);
         dailyStepsTextView.setText(next);
         streakMultiplier = 1;
         multiplier = 1;
@@ -281,9 +253,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         running = true;
         registerSensor();
         registerReceiver(m_timeChangedReceiver, s_intentFilter);
-        currencyTextView.setText(String.valueOf(currency));
         dateTextView.setText(String.valueOf(LocalDate.now()));
-        loadData();
     }
 
     // Handle pause event
@@ -292,7 +262,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onPause();
         running = false;
         unregisterReceiver(m_timeChangedReceiver);
-        saveData();
     }
 
     // Handle long press to reset steps
@@ -329,31 +298,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         editor.putFloat("key1", previousTotalSteps);
         editor.putLong("currency", currency);
         editor.putLong("streak", streak);
-        editor.putFloat("multiplier", multiplier);
-        editor.putInt("streakMultiplier", streakMultiplier);
-        editor.putBoolean("pauseStreak", pauseStreak);
-        editor.putBoolean("finishedGoal", finishedGoal);
-        editor.putBoolean("finishedStreak", finishedStreak);
-        editor.putFloat("yesterdaySteps", yesterdaySteps);
-        editor.putFloat("nextGoal", nextGoal);
-        editor.putFloat("dailyGoal", dailyGoal);
-        editor.putLong("dateTestLong", dateTestLong);
-        editor.putFloat("key2_total_step", totalSteps);
         editor.apply();
         Log.d("Step Counter", "Steps saved: " + previousTotalSteps);
         Log.d("Step Counter", "Saved daily steps");
         Log.d("Step Counter", "Saved currency: " + currency);
         Log.d("Step Counter", "Saved streak: " + streak);
-        Log.d("Step Counter", "Saved multiplier: " + multiplier);
-        Log.d("Step Counter", "Saved streak multiplier: " + streakMultiplier);
-        Log.d("Step Counter", "Saved pause streak: " + pauseStreak);
-        Log.d("Step Counter", "Saved finished goal: " + finishedGoal);
-        Log.d("Step Counter", "Saved finished streak: " + finishedStreak);
-        Log.d("Step Counter", "Saved yesterday steps: " + yesterdaySteps);
-        Log.d("Step Counter", "Saved next goal: " + nextGoal);
-        Log.d("Step Counter", "Saved daily goal: " + dailyGoal);
-        Log.d("Step Counter", "Saved date test: " + dateTestLong);
-        Log.d("Step Counter", "total steps saved : " + totalSteps);
     }
 
     // Load step count
@@ -362,17 +311,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         previousTotalSteps = sharedPreferences.getFloat("key1", 0f);
         currency = sharedPreferences.getLong("currency", 0);
         streak = sharedPreferences.getLong("streak", 0);
-        multiplier = sharedPreferences.getFloat("multiplier", 1f);
-        streakMultiplier = sharedPreferences.getInt("streakMultiplier", 1);
-        pauseStreak = sharedPreferences.getBoolean("pauseStreak", false);
-        finishedGoal = sharedPreferences.getBoolean("finishedGoal", false);
-        finishedStreak = sharedPreferences.getBoolean("finishedStreak", false);
-        yesterdaySteps = sharedPreferences.getFloat("yesterdaySteps", 0f);
-        nextGoal = sharedPreferences.getFloat("nextGoal", 50f);
-        dailyGoal = sharedPreferences.getFloat("dailyGoal", 10f);
-        dateTestLong = sharedPreferences.getLong("dateTestGoal", 0);
         String storedHash = sharedPreferences.getString("hashString", "River stone");
-        java.lang.reflect.Type type = new TypeToken<HashMap<String, String>>(){}.getType();
+        java.lang.reflect.Type type = new TypeToken<HashMap<String, Integer>>(){}.getType();
         if (!storedHash.equals("River stone")) {
             Gson gson = new Gson();
             dailySteps = gson.fromJson(storedHash, type);
@@ -383,12 +323,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Log.d("Step Counter", "Loaded daily steps");
         Log.d("Step Counter", "Loaded currency: " + currency);
         Log.d("Step Counter", "Loaded streak: " + streak);
-        Log.d("Step Counter", "Loaded multiplier: " + multiplier);
-        Log.d("Step Counter", "Loaded streak multiplier: " + streakMultiplier);
-        Log.d("Step Counter", "Loaded pause streak: " + pauseStreak);
-        Log.d("Step Counter", "Loaded finished goal: " + finishedGoal);
-        Log.d("Step Counter", "Loaded finished streak: " + finishedStreak);
-        Log.d("Step Counter", "Loaded yesterday steps: " + yesterdaySteps);
     }
 
     // Handle permission request results
@@ -407,5 +341,4 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
-
 }
