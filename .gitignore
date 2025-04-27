@@ -30,10 +30,4 @@ replay_pid*
 ## This file must *NOT* be checked into Version Control Systems
 **/local.properties
 
-<<<<<<< HEAD
 **/build
-**/app/build
-=======
-# Not adding build file
-**/app/build/
->>>>>>> 09109b83 (mario adding the gitignore file)
