@@ -8,4 +8,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#808080</color>
+    <color name="Koala_fan">#daa97c</color>
+    <color name="Koala_text">#94a9ae</color>
 </resources>
