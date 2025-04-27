@@ -60,7 +60,6 @@ public class PowerUp extends AppCompatActivity {
 //            Intent intent = new Intent(PowerUp.this, Login.class);
 //            startActivity(intent);
         });
-
         // Button2: Koala Button
         Button button2 = findViewById(R.id.button2);
         button2.setOnClickListener(v -> {
