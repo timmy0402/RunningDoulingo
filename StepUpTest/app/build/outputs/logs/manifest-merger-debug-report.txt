@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:2:1-35:12
-INJECTED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:2:1-35:12
-INJECTED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:2:1-35:12
-INJECTED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:2:1-35:12
+ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:2:1-43:12
+INJECTED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:2:1-43:12
+INJECTED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:2:1-43:12
+INJECTED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:2:1-43:12
 MERGED from [androidx.databinding:viewbinding:8.9.2] /Users/dulguun/.gradle/caches/8.11.1/transforms/676a62b645792693b33b92498d79ecbd/transformed/viewbinding-8.9.2/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-common:2.6.0] /Users/dulguun/.gradle/caches/8.11.1/transforms/f81a50d4c44fb6a08da79ee4519863d3/transformed/navigation-common-2.6.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-runtime:2.6.0] /Users/dulguun/.gradle/caches/8.11.1/transforms/9074e4f508ef6195545c32efd353f3fb/transformed/navigation-runtime-2.6.0/AndroidManifest.xml:17:1-22:12
@@ -74,8 +74,8 @@ ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/ma
 	android:name
 		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:5:22-76
 application
-ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:7:5-33:19
-INJECTED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:7:5-33:19
+ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:7:5-41:19
+INJECTED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:7:5-41:19
 MERGED from [com.google.android.material:material:1.10.0] /Users/dulguun/.gradle/caches/8.11.1/transforms/f54ff8cf062e6c5c9c4b08f5ce3139aa/transformed/material-1.10.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.10.0] /Users/dulguun/.gradle/caches/8.11.1/transforms/f54ff8cf062e6c5c9c4b08f5ce3139aa/transformed/material-1.10.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /Users/dulguun/.gradle/caches/8.11.1/transforms/54c625f5a609704ffe5cc3184b46602c/transformed/constraintlayout-2.1.4/AndroidManifest.xml:9:5-20
@@ -116,36 +116,52 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/dulg
 		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:15:9-48
 	android:dataExtractionRules
 		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:9:9-65
-activity#com.example.stepuptest.Login
+activity#com.example.stepuptest.Rank
 ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:17:9-19:40
 	android:exported
 		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:19:13-37
 	android:name
-		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:18:13-34
-activity#com.example.stepuptest.PowerUp
-ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:20:9-22:40
+		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:18:13-33
+activity#com.example.stepuptest.Home
+ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:20:9-24:67
+	android:label
+		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:23:13-56
 	android:exported
 		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:22:13-37
+	android:theme
+		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:24:13-64
 	android:name
-		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:21:13-36
-activity#com.example.stepuptest.MainActivity
-ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:23:9-32:20
-	android:label
-		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:26:13-45
+		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:21:13-33
+activity#com.example.stepuptest.Login
+ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:25:9-27:40
 	android:exported
-		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:25:13-36
+		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:27:13-37
 	android:name
-		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:24:13-41
+		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:26:13-34
+activity#com.example.stepuptest.PowerUp
+ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:28:9-30:40
+	android:exported
+		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:29:13-36
+activity#com.example.stepuptest.MainActivity
+ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:31:9-40:20
+	android:label
+		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:34:13-45
+	android:exported
+		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:33:13-36
+	android:name
+		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:32:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:27:13-31:29
+ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:35:13-39:29
 action#android.intent.action.MAIN
-ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:28:17-69
+ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:36:17-69
 	android:name
-		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:28:25-66
+		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:36:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:30:17-77
+ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:38:17-77
 	android:name
-		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:30:27-74
+		ADDED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml:38:27-74
 uses-sdk
 INJECTED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/dulguun/Desktop/Hackaton/RunningDoulingo/StepUpTest/app/src/main/AndroidManifest.xml

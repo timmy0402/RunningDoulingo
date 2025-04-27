@@ -56,17 +56,6 @@
 <!--        app:layout_constraintStart_toStartOf="@id/fab"-->
 <!--        app:layout_constraintTop_toTopOf="@id/fab" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/tv_date"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="-&#45;&#45;&#45;&#45;&#45;&#45;  Jan 1  -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;"-->
-<!--        android:textSize="40sp"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/circleImageV"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/circleImageV"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/circleImageV"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/circleImageV" />-->
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"

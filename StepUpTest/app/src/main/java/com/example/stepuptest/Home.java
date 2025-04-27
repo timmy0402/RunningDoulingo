@@ -37,26 +37,10 @@ public class Home extends AppCompatActivity {
         LinearLayout dateTimeContainer = findViewById(R.id.dateTimeContainer);
 
         Calendar calendar = Calendar.getInstance();
-//        calendar.set(2025, Calendar.APRIL, 1);
-//
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM d", Locale.getDefault());
-//        for (int i = 0; i < 29; i++) {
-//            TextView textView = new TextView(this);
-//            textView.setTextSize(20f);
-//            textView.setPadding(16, 8, 16, 8);
-//            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-//
-//            String formattedDate = dateFormat.format(calendar.getTime());
-//            textView.setText(formattedDate);
-//
-//            dateTimeContainer.addView(textView);
-//            calendar.add(Calendar.DAY_OF_MONTH, 1);
-//
-//        }
-        calendar.set(2025, Calendar.MAY, 1);
+        calendar.set(2025, Calendar.APRIL, 30);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM d", Locale.getDefault());
-        for (int i = 0; i < 29; i--) {
+        for (int i = 29; i >0; i--) {
             TextView textView = new TextView(this);
             textView.setTextSize(20f);
             textView.setPadding(16, 8, 16, 8);
@@ -66,10 +50,7 @@ public class Home extends AppCompatActivity {
             textView.setText(formattedDate);
 
             dateTimeContainer.addView(textView);
-//            calendar.add(Calendar.DAY_OF_MONTH, 1);
-
             calendar.add(Calendar.DAY_OF_MONTH, -1);
-
         }
 
         Toolbar toolbar = binding.toolbar;

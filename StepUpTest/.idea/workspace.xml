@@ -5,6 +5,22 @@
       <config />
     </shared>
     <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout-w1240dp/content_scrolling.xml">
+        <config>
+          <theme>@style/Theme.StepUpTest.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout-w936dp/content_scrolling.xml">
+        <config>
+          <state>Portrait</state>
+          <theme>@style/Theme.StepUpTest.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+        <config>
+          <theme>@style/Theme.StepUpTest.NoActionBar</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
         <config>
           <theme>@style/Theme.StepUpTest</theme>
@@ -18,6 +34,16 @@
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_power_up.xml">
         <config>
           <theme>@style/Theme.StepUpTest</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_rank.xml">
+        <config>
+          <theme>@style/Theme.StepUpTest</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/content_scrolling.xml">
+        <config>
+          <theme>@style/Theme.StepUpTest.NoActionBar</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard.xml">
@@ -45,6 +71,11 @@
           <theme>@style/Theme.StepUpTest</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/menu_home.xml">
+        <config>
+          <theme>@style/Theme.StepUpTest.NoActionBar</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/navigation/mobile_navigation.xml">
         <config>
           <theme>@style/Theme.StepUpTest</theme>
@@ -56,12 +87,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3836e4c6-0237-463c-983d-a5e25756c615" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../step-up/StepUp" beforeDir="false" afterPath="$PROJECT_DIR$/../step-up/StepUp" afterDir="false" />
-    </list>
+    <list default="true" id="3836e4c6-0237-463c-983d-a5e25756c615" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,6 +128,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Android App.app.executor": "Run",
+    "ResourceManagerPrefKey.ResourceType": "LAYOUT",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -119,6 +146,7 @@
   <component name="RecentsManager">
     <key name="android.template.1450588135">
       <recent name="com.example.stepuptest" />
+      <recent name="com.example.stepuptest.ui" />
     </key>
   </component>
   <component name="RunManager">
