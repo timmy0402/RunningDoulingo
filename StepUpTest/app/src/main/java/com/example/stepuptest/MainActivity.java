@@ -27,10 +27,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private float totalSteps = 0f;
     private float previousTotalSteps = 0f;
 
-    private float nextGoal = 1000f;
+    private float nextGoal = 50f;
 
     // UI Component
     private TextView stepsTakenTextView;
+
+    private TextView stepGoalTextView;
 
     private static final int PERMISSION_REQUEST_ACTIVITY_RECOGNITION = 100;
 
@@ -48,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         // Define text view for step count
         stepsTakenTextView = findViewById(R.id.tv_stepsTaken);
+
+        stepGoalTextView = findViewById(R.id.tv_stepGoal);
 
         // Define sensor and sensor manager
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -98,7 +102,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             totalSteps = event.values[0];
             int currentSteps = (int) (totalSteps - previousTotalSteps);
             stepsTakenTextView.setText(String.valueOf(currentSteps));
+            int remainingSteps = (int) (nextGoal - currentSteps);
+            String goal = (remainingSteps > 0) ? Integer.toString(currentSteps) + "/" + Integer.toString((int)nextGoal) : "Achieved!";
+            if (remainingSteps < -20) {
+                nextGoal = truncate((int)(50 * Math.sqrt(nextGoal + 2)), 2);
+            }
+            stepGoalTextView.setText(goal);
         }
+    }
+
+    private float truncate(int num, int degree) {
+        return (int) (Math.floor(num / Math.pow(10.0, degree)) * ((int) Math.pow(10, degree)));
     }
 
     // Handle resume event

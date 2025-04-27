@@ -32,3 +32,9 @@ replay_pid*
 
 **/build
 **/app/build
+
+**/build
+**/app/build
+
+# Not adding build file
+**/app/build/
