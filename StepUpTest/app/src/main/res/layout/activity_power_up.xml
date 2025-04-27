@@ -33,7 +33,6 @@
         android:layout_height="0dp"
         android:layout_marginTop="180dp"
         android:drawableTop="@drawable/baseline_pause_24"
-        android:text="x3: 25"
         android:drawablePadding="10dp"
         android:gravity="center"
         android:textSize="32sp"
