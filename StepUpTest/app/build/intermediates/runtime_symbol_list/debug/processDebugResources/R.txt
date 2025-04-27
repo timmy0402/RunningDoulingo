@@ -3592,6 +3592,7 @@ int id transition_position 0x7f0801e9
 int id transition_scene_layoutid_cache 0x7f0801ea
 int id transition_transform 0x7f0801eb
 int id triangle 0x7f0801ec
+int id tv_currency 0x7f080208
 int id tv_dailySteps 0x7f0801ed
 int id tv_date 0x7f0801ee
 int id tv_stepGoal 0x7f0801ef

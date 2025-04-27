@@ -34,6 +34,9 @@ public final class ActivityMainBinding implements ViewBinding {
   public final TextView steps;
 
   @NonNull
+  public final TextView tvCurrency;
+
+  @NonNull
   public final TextView tvDailySteps;
 
   @NonNull
@@ -47,7 +50,7 @@ public final class ActivityMainBinding implements ViewBinding {
 
   private ActivityMainBinding(@NonNull ConstraintLayout rootView,
       @NonNull ConstraintLayout container, @NonNull ImageView imageView,
-      @NonNull BottomNavigationView navView, @NonNull TextView steps,
+      @NonNull BottomNavigationView navView, @NonNull TextView steps, @NonNull TextView tvCurrency,
       @NonNull TextView tvDailySteps, @NonNull TextView tvDate, @NonNull TextView tvStepGoal,
       @NonNull TextView tvStepsTaken) {
     this.rootView = rootView;
@@ -55,6 +58,7 @@ public final class ActivityMainBinding implements ViewBinding {
     this.imageView = imageView;
     this.navView = navView;
     this.steps = steps;
+    this.tvCurrency = tvCurrency;
     this.tvDailySteps = tvDailySteps;
     this.tvDate = tvDate;
     this.tvStepGoal = tvStepGoal;
@@ -108,6 +112,12 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tv_currency;
+      TextView tvCurrency = ViewBindings.findChildViewById(rootView, id);
+      if (tvCurrency == null) {
+        break missingId;
+      }
+
       id = R.id.tv_dailySteps;
       TextView tvDailySteps = ViewBindings.findChildViewById(rootView, id);
       if (tvDailySteps == null) {
@@ -133,7 +143,7 @@ public final class ActivityMainBinding implements ViewBinding {
       }
 
       return new ActivityMainBinding((ConstraintLayout) rootView, container, imageView, navView,
-          steps, tvDailySteps, tvDate, tvStepGoal, tvStepsTaken);
+          steps, tvCurrency, tvDailySteps, tvDate, tvStepGoal, tvStepsTaken);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

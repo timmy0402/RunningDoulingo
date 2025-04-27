@@ -32,6 +32,7 @@ id steps
 id text_dashboard
 id text_home
 id text_notifications
+id tv_currency
 id tv_dailySteps
 id tv_date
 id tv_stepGoal
