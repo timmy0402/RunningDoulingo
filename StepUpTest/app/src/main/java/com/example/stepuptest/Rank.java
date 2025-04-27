@@ -1,6 +1,8 @@
 package com.example.stepuptest;
 
 import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -8,28 +10,42 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class Rank extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private RankAdapter adapter;
+    private List<RankItem> rankList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_rank);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-        BottomNavigationView bottomNavigationView=findViewById(R.id.nav_view);
+        recyclerView = findViewById(R.id.rank_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        loadDailySteps();
+
+        adapter = new RankAdapter(rankList);
+        recyclerView.setAdapter(adapter);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.rank);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
-
             if (id == R.id.navigation_home) {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 overridePendingTransition(0, 0);
@@ -48,20 +64,24 @@ public class Rank extends AppCompatActivity {
             return false;
         });
     }
+
     private void loadDailySteps() {
-        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
-        String storedHash = sharedPreferences.getString("hashString", null);
+        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+        float totalSteps = sharedPreferences.getFloat("totalSteps", 0f);
+        float previousTotalSteps = sharedPreferences.getFloat("previousTotalSteps", 0f);
         rankList = new ArrayList<>();
 
-        if (storedHash != null) {
-            Gson gson = new Gson();
-            Type type = new TypeToken<HashMap<String, Integer>>() {}.getType();
-            HashMap<String, Integer> dailySteps = gson.fromJson(storedHash, type);
-
-            for (String date : dailySteps.keySet()) {
-                int steps = dailySteps.get(date);
-                rankList.add(new RankItem(date, steps));
-            }
-        }
+        String todayDate = java.time.LocalDate.now().toString();
+        rankList.add(new RankItem(todayDate, (int) (totalSteps - previousTotalSteps)));
     }
+
+//    private void loadDailySteps() {
+//        float totalSteps = getIntent().getFloatExtra("totalSteps", 0f);
+//        float previousTotalSteps = getIntent().getFloatExtra("previousTotalSteps", 0f);
+//        rankList = new ArrayList<>();
+//
+//        // Just add today's date and total steps
+//        String todayDate = java.time.LocalDate.now().toString();
+//        rankList.add(new RankItem(todayDate, (int) (totalSteps - previousTotalSteps)));
+//    }
 }
