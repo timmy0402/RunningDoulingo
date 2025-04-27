@@ -1,5 +1,7 @@
 package com.example.stepuptest;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.stepuptest.ui.progress.CircleProgressView;
@@ -7,12 +9,15 @@ import com.example.stepuptest.ui.progress.CircleProgressView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.stepuptest.databinding.ActivityHomeBinding;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,6 +32,20 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        HashMap<String, String> dailySteps;
+
+        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        String storedHash = sharedPreferences.getString("hashString", "River stone");
+        java.lang.reflect.Type type = new TypeToken<HashMap<String, String>>(){}.getType();
+        if (!storedHash.equals("River stone")) {
+            Gson gson = new Gson();
+            dailySteps = gson.fromJson(storedHash, type);
+        } else {
+            dailySteps  = new HashMap<>();
+        }
+
+        Log.d("Step Counter", "Loaded daily steps");
+
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -36,12 +55,12 @@ public class Home extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2025, Calendar.APRIL, 27);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM d", Locale.getDefault());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
 
         for (int i = 7; i > 0; i--) {
             String dateKey = dateFormat.format(calendar.getTime());
-            String stepsInfo = MainActivity.dailySteps.getOrDefault(dateKey, "0/8000");
+            String stepsInfo = dailySteps.getOrDefault(dateKey, "0/8000");
 
             LinearLayout linearDaily = new LinearLayout(this);
             linearDaily.setGravity(Gravity.CENTER_VERTICAL);

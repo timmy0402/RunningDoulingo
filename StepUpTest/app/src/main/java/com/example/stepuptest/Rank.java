@@ -99,8 +99,10 @@ public class Rank extends AppCompatActivity {
         Intent intent = getIntent();
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
         float totalSteps = sharedPreferences.getFloat("key2_total_step", 0f);
+        float previousTotalSteps = sharedPreferences.getFloat("key1", 0f);
 
         Log.d("Step Counter", "Loaded total steps : " + totalSteps);
+        Log.d("Step Counter", "Loaded steps: " + previousTotalSteps);
 
 
         rankList = new ArrayList<>();
@@ -109,7 +111,7 @@ public class Rank extends AppCompatActivity {
         rankList.add(new RankItem("Anoop", 134));
         rankList.add(new RankItem("Dudu", 20));
         rankList.add(new RankItem("Mario", 1));
-        rankList.add(new RankItem("MyKoala", (int) (totalSteps)));
+        rankList.add(new RankItem("MyKoala", (int) (totalSteps - previousTotalSteps)));
 
         rankList.sort(RankItem::compareTo);
     }
