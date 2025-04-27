@@ -83,6 +83,16 @@
         app:layout_constraintStart_toEndOf="@id/button3"
         app:layout_constraintTop_toBottomOf="@id/button2"
         app:layout_constraintWidth_percent="0.45" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        android:textSize="25sp"
+        android:text="10000000 $$$$"
+        android:gravity="center"
+        android:fontFamily="@font/bowlby_one"
+
+        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
