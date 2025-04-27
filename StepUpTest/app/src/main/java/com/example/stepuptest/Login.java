@@ -1,5 +1,6 @@
 package com.example.stepuptest;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,9 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     // Intent to open another page
                     // startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+
+                    startActivity(new Intent(Login.this, Home.class));
+
                 } else {
                     Toast.makeText(Login.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
                 }
