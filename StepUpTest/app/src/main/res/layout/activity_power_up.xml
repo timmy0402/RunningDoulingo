@@ -6,26 +6,38 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="?attr/actionBarSize"
     tools:context=".PowerUp">
 
-    <Button
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:textSize="32sp"
+    android:text="POWER UP"
+    android:gravity="center"
+    />
+
+    <ImageButton
         android:id="@+id/button1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="32dp"
-        android:text="||"
-        android:textSize="32sp"
+        android:src="@drawable/baseline_pause_24"
+        android:contentDescription="Stop"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/button2"
         app:layout_constraintHeight_percent="0.2"
-        app:layout_constraintWidth_percent="0.45"/>
+        app:layout_constraintWidth_percent="0.45"
+        android:layout_marginTop="180dp"
+        android:background="#FF6200EE"
+        />
+
 
     <Button
         android:id="@+id/button2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="180dp"
         android:text="Koala"
         android:textSize="32sp"
         app:layout_constraintTop_toTopOf="parent"

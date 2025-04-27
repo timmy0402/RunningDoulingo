@@ -3,6 +3,7 @@ package com.example.stepuptest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +15,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class PowerUp extends AppCompatActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //ImageView imageView = findViewById(R.id.imageViewIcon_power);
+        //imageView.setImageResource(R.drawable.ic_main);
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_power_up);
 //        setContentView(R.layout.fragment_dashboard);
