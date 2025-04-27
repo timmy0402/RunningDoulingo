@@ -14,8 +14,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
+import android.content.Intent;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +31,11 @@ import java.time.LocalDate;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import com.google.android.material.navigation.NavigationBarView;
+
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
+
+
 
     // Declare sensor and sensor manager
     private SensorManager sensorManager;
@@ -69,6 +78,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private static final int PERMISSION_REQUEST_ACTIVITY_RECOGNITION = 100;
 
+    private Button nextActivityButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,9 +113,36 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             Toast.makeText(this, "No Step Counter Sensor found!", Toast.LENGTH_LONG).show();
         }
 
+
         loadData();
         resetSteps();
         testDate();
+
+        BottomNavigationView bottomNavigationView=findViewById(R.id.nav_view);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+             int id = item.getItemId();
+
+             if (id == R.id.navigation_home) {
+                 return true;
+             } else if (id == R.id.power_up) {
+                 startActivity(new Intent(getApplicationContext(), PowerUp.class));
+                 overridePendingTransition(0, 0);
+                 return true;
+             } else if (id == R.id.login) {
+                 startActivity(new Intent(getApplicationContext(), Login.class));
+                 overridePendingTransition(0, 0);
+                 return true;
+             }
+             else if (id == R.id.rank) {
+                 startActivity(new Intent(getApplicationContext(), Rank.class));
+                 overridePendingTransition(0, 0);
+                 return true;
+             }
+             return false;
+        });
+
     }
 
     // Register sensor when activity starts
