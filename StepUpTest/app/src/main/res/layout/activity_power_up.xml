@@ -11,11 +11,12 @@
     tools:context=".PowerUp">
 
     <TextView
+        android:id="@+id/powerUP"
         android:layout_width="match_parent"
         android:layout_height="0dp"
 
         android:layout_marginEnd="4dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
 
         android:fontFamily="@font/bowlby_one"
         android:gravity="center"
@@ -31,14 +32,14 @@
         android:id="@+id/button1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="180dp"
         android:drawableTop="@drawable/baseline_pause_24"
+        android:drawablePadding="10dp"
         android:gravity="center"
         android:textSize="32sp"
+        app:layout_constraintTop_toBottomOf="@id/powerUP"
         app:layout_constraintEnd_toStartOf="@id/button2"
         app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.45" />
 
     <TextView
@@ -47,7 +48,7 @@
         android:drawableLeft="@drawable/ic_coin"
         android:fontFamily="@font/bowlby_one"
         android:gravity="center_vertical"
-        android:text="50"
+        android:text="10"
         android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@id/button1"
 
@@ -59,14 +60,14 @@
         android:id="@+id/button2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="180dp"
         android:drawableTop="@drawable/ic_main"
 
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/powerUP"
+
         app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toEndOf="@id/button1"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.45" />
     <TextView
         android:layout_width="0dp"
@@ -103,7 +104,7 @@
         android:drawableLeft="@drawable/ic_coin"
         android:fontFamily="@font/bowlby_one"
         android:gravity="center_vertical"
-        android:text="10"
+        android:text="25"
         android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@id/button3"
 
